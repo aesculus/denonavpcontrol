@@ -11,10 +11,10 @@ The plugin has only been tested with the Denon AVP-A1HD and the Squeezebox Recei
 
  The plugin supports the following features:
 
-* Turns the Denon amplifier on when the user turns on a Squeezebox or plays a song
-* Puts the Denon amplifier in standby when the user turns the Squeezebox off
-* Changes the volume of the Denon amplifier when the user changes the Squeezebox volume
-* Sets the Squeezebox volume to the default setting of the Denon amplifier when turned on
-* Optionally sets one of the three Denon QuickSelect modes
-* The user specifies the maximum volume the amplifier can be set to
-* The user can pick an optional on or off delay timer
+  * Turns the Denon amplifier on when the user turns on a Squeezebox or plays a song
+  * Puts the Denon amplifier in standby when the user turns the Squeezebox off
+  * Changes the volume of the Denon amplifier when the user changes the Squeezebox volume
+  * Sets the Squeezebox volume to the default setting of the Denon amplifier when turned on
+  * Optionally sets one of the three Denon QuickSelect modes
+  * The user specifies the maximum volume the amplifier can be set to
+  * The user can pick an optional on or off delay timer
