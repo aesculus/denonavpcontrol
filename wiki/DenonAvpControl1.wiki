@@ -1,4 +1,5 @@
-A SqueezeCenter plugin to control Denon AVP and AVRs from the SqueezeCenter and 
+#labels Featured
+A SqueezeCenter plugin to control the Denon AVP/POA and AVRs from the SqueezeCenter and 
 SqueezeBox Classic and Receiver.
 
 = Introduction =
