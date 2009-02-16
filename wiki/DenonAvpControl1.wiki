@@ -3,7 +3,7 @@ A SqueezeCenter plugin to control the Denon AVP/POA and AVRs from the SqueezeCen
 SqueezeBox Classic and Receiver.
 
 = Introduction =
-This Squeezebox plugin will turn on and off a Denon amplifier/receiver when the Squeezebox is turned on/off or a song is played. The plugin will optionally set one of the QuickSelect? modes, and set the volume of the Squeezebox to match the amplifier volume. The user can also set a optional on or off delay timer and set the maximum volume level they wish the amplifier to be set to when controlling the Squeezebox. 
+This Squeezebox plugin will turn on and off a Denon amplifier/receiver when the Squeezebox is turned on/off or a song is played. The plugin will optionally set one of the QuickSelect modes, and set the volume of the Squeezebox to match the amplifier volume. The user can also set a optional on or off delay timer and set the maximum volume level they wish the amplifier to be set to when controlling the Squeezebox. 
 The plugin uses the Denon serial protocol over a wireless or wired network and therefore a network connection between the SqueezeCenter server and the Denon amplifier must be available. 
 
 The plugin has only been tested with the Denon AVP-A1HD and the Squeezebox Receiver but it should work with any Denon amplifier/receiver that supports the Denon serial protocol over a network and the Squeezebox Classic as well. The plugin has also been tested with the Apple iPod Touch 2nd Gen using the iPeng application.
