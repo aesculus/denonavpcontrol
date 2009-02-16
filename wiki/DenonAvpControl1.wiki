@@ -1,10 +1,10 @@
 #labels Featured
-A SqueezeCenter plugin to control the Denon AVP/POA and AVRs from the SqueezeCenter and 
+A SqueezeCenter plugin to control the Denon AVP/POA and AVRs from the [http://www.slimdevices.com/pi_features.html SqueezeCenter] and 
 SqueezeBox Classic and Receiver.
 
 = Introduction =
-This Squeezebox plugin will turn on and off a Denon amplifier/receiver when the Squeezebox is turned on/off or a song is played. The plugin will optionally set one of the QuickSelect modes, and set the volume of the Squeezebox to match the amplifier volume. The user can also set a optional on or off delay timer and set the maximum volume level they wish the amplifier to be set to when controlling the Squeezebox. 
-The plugin uses the Denon serial protocol over a wireless or wired network and therefore a network connection between the SqueezeCenter server and the Denon amplifier must be available. 
+This Squeezebox plugin will turn on and off a Denon amplifier/receiver when the Squeezebox is turned on/off or a song is played. The plugin will optionally set one of the Quick Select modes, and set the volume of the Squeezebox to match the amplifier volume. The user can also set a optional on or off delay timer and set the maximum volume level they wish the amplifier to be set to when controlling the Squeezebox. 
+The plugin uses the Denon serial protocol over a wireless or wired network and therefore a network connection between the [http://www.slimdevices.com/pi_features.html SqueezeCenter] server and the Denon amplifier must be available. 
 
 The plugin has only been tested with the Denon AVP-A1HD and the Squeezebox Receiver but it should work with any Denon amplifier/receiver that supports the Denon serial protocol over a network and the Squeezebox Classic as well. The plugin has also been tested with the Apple iPod Touch 2nd Gen using the iPeng application.
 
@@ -14,7 +14,7 @@ The plugin has only been tested with the Denon AVP-A1HD and the Squeezebox Recei
   * Puts the Denon amplifier in standby when the user turns the Squeezebox off
   * Changes the volume of the Denon amplifier when the user changes the Squeezebox volume
   * Sets the Squeezebox volume to the default setting of the Denon amplifier when turned on
-  * Optionally sets one of the three Denon QuickSelect modes when turned on
+  * Optionally sets one of the three Denon Quick Select modes when turned on
   * The user specifies the maximum volume the amplifier can be set to
   * The user can pick an optional on and/or off delay timer
-  * The plugin can be enabled/disabled without restarting the SqueezeCenter after the initial installation
+  * The plugin can be enabled/disabled without restarting the [http://www.slimdevices.com/pi_features.html SqueezeCenter] after the initial installation
