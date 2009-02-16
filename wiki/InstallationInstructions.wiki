@@ -1,5 +1,5 @@
 #labels Configure,Settings,Installation
-This page describes how to install and configure the DenonAvpControl plugin for the SqueezeCenter.
+This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ DenonAvpControl] plugin for the SqueezeCenter.
 =Installing the Plugin=
 To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your SqueezeCenter server.  Restart the SqueezeCenter server for the plugin to be recognized.
 
