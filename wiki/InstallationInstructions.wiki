@@ -1,25 +1,25 @@
 #labels Configure,Settings,Installation
-This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ DenonAvpControl] plugin for the SqueezeCenter.
+This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ DenonAvpControl] plugin for the [http://www.slimdevices.com/pi_features.html SqueezeCenter].
 =Installing the Plugin=
-To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your SqueezeCenter server.  Restart the SqueezeCenter server for the plugin to be recognized.
+To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your [http://www.slimdevices.com/pi_features.html SqueezeCenter] server.  Restart the SqueezeCenter server for the plugin to be recognized.
 
-To remove the plugin from the server uncheck the DenonAvpControl plugin from the list of Plugins in the SqueezeCenter web control.
+To remove the plugin from the server uncheck the [http://code.google.com/p/denonavpcontrol/ DenonAvpControl] plugin from the list of Plugins in the [http://www.slimdevices.com/pi_features.html SqueezeCenter] web control.
 
 See the SlimDevices website for more information on how to install plugins.
 
 =Configuring the Plugin=
-The DenonAvpControl plugin is completely configured from the SqueezeCenter Web GUI.  There is nothing to be done on the Squeezebox nor does the Squeezebox have any display associated with the plugin.
+The DenonAvpControl plugin is completely configured from the [http://www.slimdevices.com/pi_features.html SqueezeCenter] Web GUI.  There is nothing to be done on the Squeezebox nor does the Squeezebox have any display associated with the plugin.
 
-Once the plugin is installed and the SqueezeCenter has been restarted, you can configure the plugin for your Squeezebox.  Note that you can have as many instances of the plugin as you have Squeezeboxes.  The settings and control of the plugin are specific to each Squeezebox.  However it is suggested that you do not have any more than one Squeezebox control a given amplifier/AVR.  You could though have multiple Denon amplifiers in your system, all controlled separately by a different Squeezebox and DenonAvpControl plugin.
+Once the plugin is installed and the [http://www.slimdevices.com/pi_features.html SqueezeCenter] has been restarted, you can configure the plugin for your Squeezebox.  Note that you can have as many instances of the plugin as you have Squeezeboxes.  The settings and control of the plugin are specific to each Squeezebox.  However it is suggested that you do not have any more than one Squeezebox control a given amplifier/AVR.  You could though have multiple Denon amplifiers in your system, all controlled separately by a different Squeezebox and DenonAvpControl plugin.
 
 To configure the plugin:
 
-  * Access the SqueezeCenter Web GUI.
+  * Access the [http://www.slimdevices.com/pi_features.html SqueezeCenter] Web GUI.
   * Choose Settings and the player you wish to configure
   * From the pull-down menu choose *Denon AVP Control*
 
 ==Enable Plugin==
-You can toggle the use of the plugin on/off without having to remove it from the SqueezeCenter.  Check the box and the plugin will be enabled. Unchecking the box and the plugin will ignore any changes made while using the Squeezebox.
+You can toggle the use of the plugin on/off without having to remove it from the [http://www.slimdevices.com/pi_features.html SqueezeCenter].  Check the box and the plugin will be enabled. Unchecking the box and the plugin will ignore any changes made while using the Squeezebox.
 
 ==IP Address of Denon AVP==
 You must enter the IP address (less http://) of your AVP/AVR (for example *127.0.0.1*).  Note for this plugin to work you will need to have a fixed IP address set in your Denon.  You will also need to configure the Denon networking to turn off *Power Saver* mode in the network settings.  Failure to do either of these will result in the plugin not being able to communicate with your Denon amplifier.  See the Denon owners manual for instructions on making these settings.
@@ -31,9 +31,9 @@ Enter the number of seconds you want to wait for after the Squeezebox is turned 
 Enter the number of seconds you want to wait for after the Squeezebox is turned off before the AVP/AVR is put into standby.  If you change the state (ie turn it on) within this period, the plugin will not send the command to the amplifier and it will be essentially cancelled.  The default is zero seconds.
 
 ==Quick Select Option==
-Select which Quick Select option you would like the AVP to switch to when turning on the Squeezebox from the pull-down.  Choosing *Disabled* means the plugin will ignore this feature.  Note you must have preconfigured your Denon amplifier for the selected QuickSelect option for this to be effective.  After four seconds from a Power On command the plugin will request the amplifier to select one of the three QuickSelect options, if configured.
+Select which QuickSelect option you would like the AVP to switch to when turning on the Squeezebox from the pull-down.  Choosing *Disabled* means the plugin will ignore this feature.  Note you must have preconfigured your Denon amplifier for the selected QuickSelect option for this to be effective.  After four seconds from a Power On command the plugin will request the amplifier to select one of the three QuickSelect options, if configured.
 
 ==Maximum Volume of AVP==
 Enter the maximum volume you want the plugin to adjust the AVP/AVR too when making volume adjustments. 100% volume at the Squeezebox will be limited to this value on the AVP/AVR. It is suggested that you limit the volume to no more than -10.  The Squeezebox volume adjustments will vary from -80 on the Denon to whatever maximum setting you have chosen here.  What is displayed on the Squeezebox will be a ratio of this range.  For example if you set the *Maximum Volume of AVP* to 0, a 50% setting of the Squeezebox volume would result in the Denon AVP/AVR being set to -40. 
 ===Additional Comments on Volume Settings===
-Note that when the amplifier is first started, after about 5 seconds the plugin will match the Squeezebox volume to what is currently set on the AVP/AVR.  The AVP/AVR will not have its volume changed until you adjust it via the Squeezebox or SqueezeCenter.  It is suggested that you set the *Volume Control* option of the Squeezebox Audio Settings to *Output level is fixed at 100%*.  This will allow all of your volume settings for the Squeezebox, that is configured for this plugin, to go directly to the Denon AVP/AVR.  This will also eliminate the Squeezebox from altering your audio signal with its DACs, thus resulting in a purer audio signal.
+Note that when the amplifier is first started, after about 5 seconds the plugin will match the Squeezebox volume to what is currently set on the AVP/AVR.  The AVP/AVR will not have its volume changed until you adjust it via the Squeezebox or [http://www.slimdevices.com/pi_features.html SqueezeCenter].  It is suggested that you set the *Volume Control* option of the Squeezebox Audio Settings to *Output level is fixed at 100%*.  This will allow all of your volume settings for the Squeezebox, that is configured for this plugin, to go directly to the Denon AVP/AVR.  This will also eliminate the Squeezebox from altering your audio signal with its DACs, thus resulting in a purer audio signal.
