@@ -1,7 +1,7 @@
 #labels Configure,Settings,Installation
 This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ DenonAvpControl] plugin for the [http://www.slimdevices.com/pi_features.html SqueezeCenter].
 =Installing the Plugin=
-To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your [http://www.slimdevices.com/pi_features.html SqueezeCenter] server.  Restart the SqueezeCenter server for the plugin to be recognized.
+To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your [http://www.slimdevices.com/pi_features.html SqueezeCenter] server.  Restart the [http://www.slimdevices.com/pi_features.html SqueezeCenter] server for the plugin to be recognized.
 
 To remove the plugin from the server uncheck the [http://code.google.com/p/denonavpcontrol/ DenonAvpControl] plugin from the list of Plugins in the [http://www.slimdevices.com/pi_features.html SqueezeCenter] web control.
 
