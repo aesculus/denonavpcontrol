@@ -33,7 +33,14 @@ Enter the number of seconds you want to wait for after the Squeezebox is turned 
 ==Quick Select Option==
 Select which Quick Select option you would like the AVP to switch to when turning on the Squeezebox from the pull-down.  Choosing *Disabled* means the plugin will ignore this feature.  Note you must have preconfigured your Denon amplifier for the selected Quick Select option for this to be effective.  After four seconds from a Power On command the plugin will request the amplifier to select one of the three Quick Select options, if configured.
 
+==Zone Option==
+Select the Denon zone you wish the plugin to control.  You may choose between Main, Zone 2 and Zone 3.  The plugin will default to Main.  Note that the Quick Select option will only work on the Main zone.
+
 ==Maximum Volume of AVP/AVR==
 Enter the maximum volume you want the plugin to adjust the AVP/AVR too when making volume adjustments. 100% volume at the Squeezebox will be limited to this value on the AVP/AVR. It is suggested that you limit the volume to no more than -10.  The Squeezebox volume adjustments will vary from -80 on the Denon to whatever maximum setting you have chosen here.  What is displayed on the Squeezebox will be a ratio of this range.  For example if you set the *Maximum Volume of AVP/AVR* to 0, a 50% setting of the Squeezebox volume would result in the Denon AVP/AVR being set to -40. 
+
+==Enable Synching the Volume?==
+If you wish to have the Denon AVP/AVR volume adjust the Squeezebox volume at each track change, enable this checkbox. This will allow volume changes on the Denon to change the Squeezebox volume indicator. Only available for the Main zone.  The default is not to synch the volume except as noted below.  If you don't plan on adjusting the amplifier volume independant of using the Squeezebox adjustment, this will just cause extra commands to be processed by the Denon with no change to the volume indicator of the Squeezebox.
+
 ===Additional Comments on Volume Settings===
 Note that when the amplifier is first started, after about 5 seconds the plugin will match the Squeezebox volume to what is currently set on the AVP/AVR.  The AVP/AVR will not have its volume changed until you adjust it via the Squeezebox or [http://www.slimdevices.com/pi_features.html SqueezeCenter].  It is suggested that you set the *Volume Control* option of the Squeezebox Audio Settings to *Output level is fixed at 100%*.  This will allow all of your volume settings for the Squeezebox that is configured for this plugin to go directly to the Denon AVP/AVR.  This will also eliminate the Squeezebox from altering your audio signal with its DACs, thus resulting in a purer audio signal.
