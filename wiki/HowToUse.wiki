@@ -1,5 +1,5 @@
 #labels Featured,usage
-This page describes how to use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.slimdevices.com/pi_features.html Squeezebox Server].  Optionally the plugin provides a very rich user experience when combined with the native iTouch application, [http://penguinlovesmusic.de/ iPeng].
+This page describes how to use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.logitechsqueezebox.com/ Squeezebox Server].  Optionally the plugin provides a very rich user experience when combined with the native iTouch application, [http://penguinlovesmusic.de/ iPeng].
 =Using the Plugin=
 First you must install the plugin as described in the [http://code.google.com/p/denonavpcontrol/wiki/InstallationInstructions installation] wiki page.  Secondly if using the [http://penguinlovesmusic.de/ iPeng] application you must install that application on your iTouch device too.
 
