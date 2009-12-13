@@ -26,3 +26,13 @@ To turn the sytem off just select the player icon. It will become unhighlighted 
 [http://denonavpcontrol.googlecode.com/files/DenonAvpControlPlayers.jpg]  [http://denonavpcontrol.googlecode.com/files/DenonAvpControlNowPlaying.jpg]
 ===Making Adjustments to DENON Audio Settings===
 With the [http://penguinlovesmusic.de/ iPeng] application you can make changes to the audio settings on your DENON AVP/AVR while playing musing.  Press and hold on the player that is connected to you DENON from the Players screen.  The Player Settings screen will appear with the DENON AVP/AVR Control menu item at the top.  Select the DENON AVP/AVR Control menu item.  The DENON AVP/AVR Control Menu will appear.
+
+Note: The Dynamic Volume menu will only appear if you have the Dynamic Volume turned on in the Dynamic Equilizer menu.
+
+[http://denonavpcontrol.googlecode.com/files/DenonAvpControlPlayerSettings.jpg]   [http://denonavpcontrol.googlecode.com/files/DenonAvpControl.jpg]
+
+Pick a sub menu and make changes to the audio settings as is required. The plugin will send these changes to the Denon AVP/AVR for you.  When you are done with the audio setting just select the arrow at the top of the screen or scroll the screen left or right to return to the Now Playing screen.
+====Known Limitations====
+There are a few known limitations to using the [http://penguinlovesmusic.de/ iPeng] application and the DenonAvpControl plugin:
+
+  * The first time you use the plugin and the audio menus there will be no checks on the menu items to indicate which item is currently set.  Once you go to a menu and come back, its setting will be remembered
