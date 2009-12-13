@@ -1,4 +1,4 @@
-#labels Configure,Settings,Installation
+#labels Configure,Settings,Installation,Featured
 This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.slimdevices.com/pi_features.html Squeezebox Server].
 =Installing the Plugin=
 ==For [http://www.slimdevices.com/pi_features.html Squeezebox Server] 7.3 and Greater==
