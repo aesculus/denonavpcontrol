@@ -1,3 +1,4 @@
+#labels Featured,Phase-Deploy
 A [http://www.slimdevices.com/pi_features.html Squeezebox Server] plugin to control the Denon AVP/POA and networked AVRs from the [http://www.slimdevices.com/pi_features.html Squeezebox Server] and 
 SqueezeBox Classic and Receiver.
 
