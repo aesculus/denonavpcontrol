@@ -18,7 +18,11 @@ Optionally if you have selected the ability for the DENON AVP/AVR to send new vo
 When you are done with the Squeezebox and the DENON AVP/AVR simply use your Squeezebox remote or the Squeezebox Server Web GUI and turn off the player. The DENON AVP/AVR will automatically go into Standby mode.
 =Operation With the Native iPeng Application and an iTouch Device==
 For an advanced user experience with the Squeezebox I highly recommend the native[http://penguinlovesmusic.de/ iPeng] application and an iTouch device.  This section will describe how to use the DenonAvpControl plugin with the [http://penguinlovesmusic.de/ iPeng] application.
-===Turning on the Systems===
-There is no change in how you would use the DenonAvpControl plugin with [http://penguinlovesmusic.de/ iPeng] than you would with the Squeezebox natively.  Simply select the player that the plugin is configured for and press the Squeezebox player icon at the bottom of the Now Playing screen.
+===Turning On and Off the Systems===
+There is no change in how you would use the DenonAvpControl plugin with [http://penguinlovesmusic.de/ iPeng] than you would with the Squeezebox natively.  Simply select the player that the plugin is configured for and press the Squeezebox player icon at the bottom of the Now Playing screen.  When turned on the player icon will be highlighted.
 
-[http://denonavpcontrol.googlecode.com/files/DenonAvpControlPlayers.jpg][http://denonavpcontrol.googlecode.com/files/DenonAvpNowPlaying.jpg]
+To turn the sytem off just select the player icon. It will become unhighlighted and the Denon AVP/AVR will automatically go into Standby mode.
+
+[http://denonavpcontrol.googlecode.com/files/DenonAvpControlPlayers.jpg]  [http://denonavpcontrol.googlecode.com/files/DenonAvpControlNowPlaying.jpg]
+===Making Adjustments to DENON Audio Settings===
+With the [http://penguinlovesmusic.de/ iPeng] application you can make changes to the audio settings on your DENON AVP/AVR while playing musing.  Press and hold on the player that is connected to you DENON from the Players screen.  The Player Settings screen will appear with the DENON AVP/AVR Control menu item at the top.  Select the DENON AVP/AVR Control menu item.  The DENON AVP/AVR Control Menu will appear.
