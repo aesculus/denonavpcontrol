@@ -26,7 +26,7 @@ To configure the plugin:
 You can toggle the use of the plugin on/off without having to remove it from the [http://www.slimdevices.com/pi_features.html SqueezeCenter].  Check the box and the plugin will be enabled. Unchecking the box and the plugin will ignore any changes made while using the Squeezebox.
 
 ==IP Address of Denon AVP/AVR==
-You must enter the IP address (less http://) of your AVP/AVR (for example *127.0.0.1*).  Note for this plugin to work you will need to have a fixed IP address set in your Denon.  You will also need to configure the Denon networking to turn off *Power Saver* mode in the network settings.  Failure to do either of these will result in the plugin not being able to communicate with your Denon amplifier.  See the Denon owners manual for instructions on making these settings.
+You must enter the IP address (less [ http://]) of your AVP/AVR (for example *127.0.0.1*).  Note for this plugin to work you will need to have a fixed IP address set in your Denon.  You will also need to configure the Denon networking to turn off *Power Saver* mode in the network settings.  Failure to do either of these will result in the plugin not being able to communicate with your Denon amplifier.  See the Denon owners manual for instructions on making these settings.
 
 ==Delay to Turn AVP/AVR On==
 Enter the number of seconds you want to wait for after the Squeezebox is turned on before the AVP/AVR is activated.  If you change the state (ie turn it off) within this period, the plugin will not send the command to the amplifier and it will be essentially cancelled.  The default is zero seconds.
