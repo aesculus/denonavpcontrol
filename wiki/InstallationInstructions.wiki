@@ -1,20 +1,20 @@
 #labels Configure,Settings,Installation,Featured
-This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.slimdevices.com/pi_features.html Squeezebox Server].
+This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.logitechsqueezebox.com/ Squeezebox Server].
 =Installing the Plugin=
 ==For [http://www.slimdevices.com/pi_features.html Squeezebox Server] 7.3 and Greater==
 To install the plugin use the Advanced features in the Settings menu and the enter the value of this link into the plugin extension:
 http://denonavpcontrol.googlecode.com/files/repo.xml
 ==For [http://www.slimdevices.com/pi_features.html SqueezeCenter] 7.0 - 7.2==
-To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your [http://www.slimdevices.com/pi_features.html SqueezeCenter] server.  Restart the [http://www.slimdevices.com/pi_features.html SqueezeCenter] server for the plugin to be recognized.
+To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your [http://www.logitechsqueezebox.com/ SqueezeCenter] server.  Restart the [http://www.logitechsqueezebox.com/ SqueezeCenter] server for the plugin to be recognized.
 
-To remove the plugin from the server uncheck the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin from the list of Plugins in the [http://www.slimdevices.com/pi_features.html SqueezeCenter] web control.
+To remove the plugin from the server uncheck the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin from the list of Plugins in the [http://www.logitechsqueezebox.com/ SqueezeCenter] web control.
 
 See the [http://www.slimdevices.com/ SlimDevices] website for more information on how to install plugins.
 
 =Configuring the Plugin=
 The[http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin is completely configured from the [http://www.slimdevices.com/pi_features.html Squeezebox Server] Web GUI.  There is nothing to be done on the Squeezebox nor does the Squeezebox have any display associated with the plugin.
 
-Once the plugin is installed and the [http://www.slimdevices.com/pi_features.html Squeezebox Server] has been restarted, you can configure the plugin for your Squeezebox.  Note that you can have as many instances of the plugin as you have Squeezeboxes.  The settings and control of the plugin are specific to each Squeezebox.  However it is suggested that you do not have any more than one Squeezebox control a given AVP/AVR.  You could though have multiple Denon amplifiers in your system, all controlled separately by a different Squeezebox and [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin.
+Once the plugin is installed and the [http://www.slimdevices.com/pi_features.html Squeezebox Server] has been restarted, you can configure the plugin for your Squeezebox.  Note that you can have as many instances of the plugin as you have Squeezeboxes.  The settings and control of the plugin are specific to each Squeezebox.  However it is suggested that you do not have any more than one Squeezebox control a given AVP/AVR zone.  You could though have multiple Denon amplifiers in your system, all controlled separately by a different Squeezebox and [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin.  Or you could have three Squeezeboxes all controlling one Denon AVP/AVR when used in a multi-zone setting.  The audio menu features of the plugin are only valid for the Main zone of the Denon AVP/AVR.
 
 To configure the plugin:
 
