@@ -1,10 +1,10 @@
-A [http://www.slimdevices.com/pi_features.html SqueezeCenter] plugin to control the Denon AVP/POA and networked AVRs from the [http://www.slimdevices.com/pi_features.html SqueezeCenter] and 
+A [http://www.slimdevices.com/pi_features.html Squeezebox Server] plugin to control the Denon AVP/POA and networked AVRs from the [http://www.slimdevices.com/pi_features.html Squeezebox Server] and 
 SqueezeBox Classic and Receiver.
 
 = Introduction =
 This Squeezebox plugin will turn on and off a networked Denon amplifier/receiver when the Squeezebox is turned on/off or a song is played. The plugin will optionally set one of the Quick Select modes, and set the volume of the Squeezebox to match the amplifier volume. The user can also set a optional on or off delay timer and set the maximum volume level they wish the amplifier to be set to when controlling the Squeezebox. The user can modify the Denon audio settings during playback when using the iPeng application on an iTouch device.
 
-The plugin uses the Denon serial protocol over a wireless or wired network and therefore a network connection between the [http://www.slimdevices.com/pi_features.html SqueezeCenter] server and the Denon amplifier must be available. 
+The plugin uses the Denon serial protocol over a wireless or wired network and therefore a network connection between the [http://www.slimdevices.com/pi_features.html Squeezebox Server] server and the Denon amplifier must be available. 
 
 The plugin has only been tested with the Denon AVP-A1HD and the Squeezebox Receiver but it should work with any Denon amplifier/receiver that supports the Denon serial protocol over a network and the Squeezebox Classic as well. The plugin has also been tested with the Apple iPod Touch 2nd Gen using the iPeng application.
 
@@ -19,18 +19,14 @@ V 1.0
   * Optionally sets one of the three Denon Quick Select modes when turned on
   * The user specifies the maximum volume the amplifier can be set to
   * The user can pick an optional on and/or off delay timer
-  * The plugin can be enabled/disabled without restarting the [http://www.slimdevices.com/pi_features.html SqueezeCenter] after the initial installation
-
+  * The plugin can be enabled/disabled without restarting the [http://www.slimdevices.com/pi_features.html Squeezebox Server] after the initial installation
 V 1.1
   * The user can select between Main, Zone 2 and Zone 3
   * Optionally the plugin can set the Squeezebox volume from the amplifier volume at track changes
-
 V 1.2
   * Minor performance support when using multiple synched players
-
 V 1.3
   * Minor performance improvements
-
 V 1.4
   * Repo file now supports SBS 7.4
 V 1.5
