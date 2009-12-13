@@ -20,3 +20,5 @@ When you are done with the Squeezebox and the DENON AVP/AVR simply use your Sque
 For an advanced user experience with the Squeezebox I highly recommend the native[http://penguinlovesmusic.de/ iPeng] application and an iTouch device.  This section will describe how to use the DenonAvpControl plugin with the [http://penguinlovesmusic.de/ iPeng] application.
 ===Turning on the Systems===
 There is no change in how you would use the DenonAvpControl plugin with [http://penguinlovesmusic.de/ iPeng] than you would with the Squeezebox natively.  Simply select the player that the plugin is configured for and press the Squeezebox player icon at the bottom of the Now Playing screen.
+
+[http://denonavpcontrol.googlecode.com/files/DenonAvpControlPlayers.jpg][http://denonavpcontrol.googlecode.com/files/DenonAvpNowPlaying.jpg]
