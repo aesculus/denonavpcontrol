@@ -1,6 +1,11 @@
 #labels Featured,usage
 This page describes how to use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.slimdevices.com/pi_features.html SqueezeCenter].  Optionally the plugin provides a very rich user experience when combined with the native iTouch application, [http://penguinlovesmusic.de/ iPeng].
 =Using the Plugin=
-First you must install the plugin as described in the installation wiki page.  Secondly if using the [http://penguinlovesmusic.de/ iPeng] you must install that application on your iTouch device.
+First you must install the plugin as described in the [http://code.google.com/p/denonavpcontrol/wiki/InstallationInstructions installation] wiki page.  Secondly if using the [http://penguinlovesmusic.de/ iPeng] application you must install that application on your iTouch device too.
 
-Once the plugin is installed it is fairly straight forward to use, and in many cases there is nothing that you need to be aware of during use. The application is completely transparent with the exception of the optional audio settings adjustments during playback.
+Once the plugin (and [http://penguinlovesmusic.de/ iPeng]) is installed, it is fairly straight forward to use, and in many cases there is nothing that you need to be aware of during use. The application is completely transparent with the exception of the optional audio settings adjustments during playback.
+
+==Normal Operation==
+Once the plugin has been installed and configured it is very simple and transparent to use.  Make sure your DENON AVP/AVR is in Standbye mode and connected to the network (wired or wirelessly).  
+===Turning On the Systems
+To turn on the AVP/AVR you simply turn on your Squeezebox either by using the remote or the web GUI.  You may also optionally press the play button if there is currently a track in your playlist.  This will cause the Squeezebox to turn on and play the track.  This in turn will turn on the DENON AVP/AVR.  If you have set up one of the Quick Select options (highly recommended) the plugin will set your AVP/AVR to the correct input and to all your desired default audio settings.
