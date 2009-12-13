@@ -11,13 +11,13 @@ To turn on the AVP/AVR you simply turn on your Squeezebox either by using the re
 ===Playing a Track===
 To play a track simply use your Squeezebox remote or the Squeezebox Server Web GUI as you would normally.  There is no change to this process while using the plugin.  Pausing a track will not affect your DENON AVP/AVR and it will remain connected and on.
 ===Changing the Volume===
-If you change the volume using the Squeezebox remote or the Squeezebox Server Web GUI the plugin will capture your changes and automatically send these to the DENON AVP/AVR.  There is a about a half second delay between the Squeezebox and the DENON AVP/AVR built into the plugin to keep the Squeezebox from making unessessary adjustsments to the DENON.
+If you change the volume using the Squeezebox remote or the Squeezebox Server Web GUI the plugin will capture your changes and automatically send these to the DENON AVP/AVR.  There is about a half second delay between the Squeezebox and the DENON AVP/AVR built into the plugin to keep the Squeezebox from making unessessary adjustsments to the DENON.
 
-Optionally if you have selected the ability for the DENON AVP/AVR to send new volume changes the user might have made, this will occur at every track change.
+Optionally if you have selected the ability for the DENON AVP/AVR to send new volume changes the user might have made directly to the AVP/AVR, this will occur at every track change.
 ===Turing Off the Systems===
 When you are done with the Squeezebox and the DENON AVP/AVR simply use your Squeezebox remote or the Squeezebox Server Web GUI and turn off the player. The DENON AVP/AVR will automatically go into Standby mode.
 =Operation With the Native iPeng Application and an iTouch Device==
-For an advanced user experience with the Squeezebox I highly recommend the native[http://penguinlovesmusic.de/ iPeng] application and an iTouch device.  This section will describe how to use the DenonAvpControl plugin with the [http://penguinlovesmusic.de/ iPeng] application.
+For an advanced user experience with the Squeezebox I highly recommend the native [http://penguinlovesmusic.de/ iPeng] application and an iTouch device.  This section will describe how to use the DenonAvpControl plugin with the [http://penguinlovesmusic.de/ iPeng] application.
 ===Turning On and Off the Systems===
 There is no change in how you would use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin with [http://penguinlovesmusic.de/ iPeng] than you would with the Squeezebox natively.  Simply select the player that the plugin is configured for and press the Squeezebox player icon at the bottom of the Now Playing screen.  When turned on the player icon will be highlighted.
 
@@ -25,13 +25,13 @@ To turn the sytem off just select the player icon. It will become unhighlighted 
 
 [http://denonavpcontrol.googlecode.com/files/DenonAvpControlPlayers.jpg]  [http://denonavpcontrol.googlecode.com/files/DenonAvpControlNowPlaying.jpg]
 ===Making Adjustments to DENON Audio Settings===
-With the [http://penguinlovesmusic.de/ iPeng] application you can make changes to the audio settings on your DENON AVP/AVR while playing musing.  Press and hold on the player that is connected to you DENON from the Players screen.  The Player Settings screen will appear with the DENON AVP/AVR Control menu item at the top.  Select the DENON AVP/AVR Control menu item.  The DENON AVP/AVR Control Menu will appear.
+With the [http://penguinlovesmusic.de/ iPeng] application you can make changes to the audio settings on your DENON AVP/AVR while playing music.  Press and hold on the player that is connected to your DENON from the Players screen.  The Player Settings screen will appear with the DENON AVP/AVR Control menu item at the top.  Select the DENON AVP/AVR Control menu item.  The DENON AVP/AVR Control Menu will appear.
 
 Note: The Dynamic Volume menu will only appear if you have the Dynamic Volume turned on in the Dynamic Equilizer menu.
 
 [http://denonavpcontrol.googlecode.com/files/DenonAvpControlPlayerSettings.jpg]   [http://denonavpcontrol.googlecode.com/files/DenonAvpControl.jpg]
 
-Pick a sub menu and make changes to the audio settings as is required. The plugin will send these changes to the Denon AVP/AVR for you.  You can see the changes to the audio settings by the checkmap that is to the right of the menu item description.
+Pick a sub menu and make changes to the audio settings as is required. The plugin will send these changes to the Denon AVP/AVR for you.  You can see the changes to the audio settings by the checkmark that is to the right of the menu item description.
 
 When you are done with the audio setting just select the arrow at the top of the screen or scroll the screen left or right to return to the Now Playing screen.
 ====Known Limitations====
