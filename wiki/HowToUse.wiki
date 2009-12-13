@@ -19,7 +19,7 @@ When you are done with the Squeezebox and the DENON AVP/AVR simply use your Sque
 =Operation With the Native iPeng Application and an iTouch Device==
 For an advanced user experience with the Squeezebox I highly recommend the native[http://penguinlovesmusic.de/ iPeng] application and an iTouch device.  This section will describe how to use the DenonAvpControl plugin with the [http://penguinlovesmusic.de/ iPeng] application.
 ===Turning On and Off the Systems===
-There is no change in how you would use the DenonAvpControl plugin with [http://penguinlovesmusic.de/ iPeng] than you would with the Squeezebox natively.  Simply select the player that the plugin is configured for and press the Squeezebox player icon at the bottom of the Now Playing screen.  When turned on the player icon will be highlighted.
+There is no change in how you would use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin with [http://penguinlovesmusic.de/ iPeng] than you would with the Squeezebox natively.  Simply select the player that the plugin is configured for and press the Squeezebox player icon at the bottom of the Now Playing screen.  When turned on the player icon will be highlighted.
 
 To turn the sytem off just select the player icon. It will become unhighlighted and the Denon AVP/AVR will automatically go into Standby mode.
 
@@ -35,8 +35,8 @@ Pick a sub menu and make changes to the audio settings as is required. The plugi
 
 When you are done with the audio setting just select the arrow at the top of the screen or scroll the screen left or right to return to the Now Playing screen.
 ====Known Limitations====
-There are a few known limitations to using the[http://penguinlovesmusic.de/ iPeng] application and the DenonAvpControl plugin:
+There are a few known limitations in using the [http://penguinlovesmusic.de/ iPeng] application and the DenonAvpControl plugin:
 
-  * The first time you use the plugin and the audio menus there will be no checks on the menu items to indicate which item is currently set.  Once you go to a menu and come back, its setting will be remembered
+  * The first time you use the plugin with the audio menus, there will be no checkmarks on the menu items to indicate which audio item is currently set.  Once you go to a menu and come back, its setting will be remembered
   * Due to a limitation in how the Squeezebox Server works, the plugin will not be able to show changes in the AVP audio modes that have been done natively (without iPeng) until the user displays the menu twice (goes into the menu, exits the menu and returns to the menu again)
   * There is a few seconds delay for some of the menu icons to show when you first load the DenonAvpControl menu.  Once it is loaded it will then be instanteous.
