@@ -27,7 +27,9 @@ To turn the sytem off just select the player icon. It will become unhighlighted 
 ===Making Adjustments to DENON Audio Settings===
 With the [http://penguinlovesmusic.de/ iPeng] application you can make changes to the audio settings on your DENON AVP/AVR while playing music.  Press and hold on the player that is connected to your DENON from the Players screen.  The Player Settings screen will appear with the DENON AVP/AVR Control menu item at the top.  Select the DENON AVP/AVR Control menu item.  The DENON AVP/AVR Control Menu will appear.
 
-Note: The Dynamic Volume menu will only appear if you have the Dynamic Volume turned on in the Dynamic Equilizer menu.
+*Note:* The Dynamic Volume menu will only appear if you have the Dynamic Volume turned on in the Dynamic Equilizer menu.
+
+*Note:* The DENON Avp Control menu will be blank if the player is not turned on or configured to use the plugin.
 
 [http://denonavpcontrol.googlecode.com/files/DenonAvpControlPlayerSettings.jpg]   [http://denonavpcontrol.googlecode.com/files/DenonAvpControl.jpg]
 
