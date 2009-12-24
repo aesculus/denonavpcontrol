@@ -39,6 +39,7 @@ When you are done with the audio setting just select the arrow at the top of the
 ====Known Limitations====
 There are a few known limitations in using the [http://penguinlovesmusic.de/ iPeng] application and the DenonAvpControl plugin:
 
+  * Some users have reported that Version 1.5 will not adjust the volume on the Denon while using the Squeezebox player.  Version 1.4 does seem to work.
   * The first time you use the plugin with the audio menus, there will be no checkmarks on the menu items to indicate which audio item is currently set.  Once you go to a menu and come back, its setting will be remembered
   * Due to a limitation in how the Squeezebox Server works, the plugin will not be able to show changes in the AVP audio modes that have been done natively (without iPeng) until the user displays the menu twice (goes into the menu, exits the menu and returns to the menu again)
   * There is a few seconds delay for some of the menu icons to show when you first load the DenonAvpControl menu.  Once it is loaded it will then be instanteous.
