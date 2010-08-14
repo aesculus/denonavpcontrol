@@ -1,5 +1,12 @@
 #labels Configure,Settings,Installation,Featured
 This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.logitechsqueezebox.com/ Squeezebox Server].
+=Configuring the Denon=
+To configure the Denon AVP/AVR to work with the plugin you must:
+
+  * Set a fixed IP Address in the Denon AVP/AVR
+  * Turn Standby Mode Power Saving to OFF
+  * Have your Denon in Standby mode and not Off
+
 =Installing the Plugin=
 ==For [http://www.logitechsqueezebox.com/products/overview.html Squeezebox Server] 7.3 and Greater==
 To install the plugin use the Advanced features in the Settings menu and the enter the value of this link into the plugin extension:
