@@ -1,5 +1,8 @@
 #labels Configure,Settings,Installation,Featured
 This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.logitechsqueezebox.com/ Squeezebox Server].
+=Setting Up the Squeezebox Player=
+This plugin assumes that your Squeezebox player is connected to the AVP/AVR via a SPDIF connection to one of the Denon audio ports and that you have confirmed that audio can be heard from the player through the Denon to your speakers.
+
 =Configuring the Denon=
 To configure the Denon AVP/AVR to work with the plugin you must:
 
