@@ -11,7 +11,7 @@ To configure the Denon AVP/AVR to work with the plugin you must:
   * Have your Denon in Standby mode and not Off
 
 =Installing the Plugin=
-==For [http://www.mysqueezebox.com/download Logitech Media Server] 7.7 and Greater==
+==For SqueezeCenter 7.3+ or [http://www.mysqueezebox.com/download Logitech Media Server] 7.7 and Greater==
 To install the plugin use the Advanced features in the Settings menu and the enter the value of this link into the plugin extension:
 http://denonavpcontrol.googlecode.com/files/repo.xml
 ==For [http://www.slimdevices.com/pi_features.html SqueezeCenter] 7.0 - 7.2==
@@ -58,9 +58,9 @@ Enter the maximum volume you want the plugin to adjust the AVP/AVR too when maki
 If you wish to have the Denon AVP/AVR volume adjust the Squeezebox volume at each track change, enable this checkbox. This will allow volume changes on the Denon to change the Squeezebox volume indicator. Only available for the Main zone.  The default is not to synch the volume except as noted below.  If you don't plan on adjusting the amplifier volume independant of using the Squeezebox adjustment, this will just cause extra commands to be processed by the Denon with no change to the volume indicator of the Squeezebox.
 
 ===Additional Comments on Volume Settings===
-*Note: Currently on some installations of Squeeze Server setting the system to 100% volume will cause iPeng not to be able to change the volume. Version 1.2 and 1.21 of iPeng suppress the use of the volume control when the Squeeze Server player volume setting is at 100%. Version 1.2.5 of iPeng resolves this problem.  Unless iPeng version 1.2.5 or later is installed on your system you should not set the player audio at 100% if you plan to use iPeng.*
+*Note: Currently on some installations of [http://www.mysqueezebox.com/download Logitech Media Server] setting the system to 100% volume will cause iPeng not to be able to change the volume. Version 1.2 and 1.21 of iPeng suppress the use of the volume control when the Squeeze Server player volume setting is at 100%. Version 1.2.5 of iPeng resolves this problem.  Unless iPeng version 1.2.5 or later is installed on your system you should not set the player audio at 100% if you plan to use iPeng.*
 
-*If you are using a Touch as your player device you will need to make a modification to enable 100% volume output.  Refer to this forum item for more information: http://forums.slimdevices.com/showthread.php?t=77837 The current version of LMS 7.7.x eliminates the ability to use this feature.  I am looking for a alternative but its probably only going to be fixed in the LMS server by the authors of that program.*
+*If you are using a Touch as your player device you will need to make a modification to enable 100% volume output.  Refer to this forum item for more information: http://forums.slimdevices.com/showthread.php?t=77837 The current version of LMS 7.7.x eliminates the ability to use this feature if you set the player to output 100% Volume from the menu. You must follow the instructions on the forum entry to patch your player to allow for 100% volume without using the menu.*
 
 Note that when the amplifier is first started, after about 5 seconds the plugin will match the Squeezebox volume to what is currently set on the AVP/AVR.  The AVP/AVR will not have its volume changed until you adjust it via the Squeezebox or [http://www.mysqueezebox.com/download Logitech Media Server].  It is suggested that you set the *Volume Control* option of the Squeezebox Audio Settings to *Output level is fixed at 100%*.  This will allow all of your volume settings for the Squeezebox that is configured for this plugin to go directly to the Denon AVP/AVR.  This will also eliminate the Squeezebox from altering your audio signal with its DACs, thus resulting in a purer audio signal.
 
