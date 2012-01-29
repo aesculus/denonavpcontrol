@@ -1,7 +1,7 @@
 #labels Configure,Settings,Installation,Featured
-This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.logitechsqueezebox.com/ Squeezebox Server].
+This page describes how to install and configure the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.mysqueezebox.com/download Logitech Media Server].
 =Setting Up the Squeezebox Player=
-This plugin assumes that your Squeezebox player is connected to the AVP/AVR via a SPDIF connection to one of the Denon audio ports and that you have confirmed that audio can be heard from the player through the Denon to your speakers.
+This plugin assumes that your Squeezebox player is connected to the AVP/AVR via a digital connection to one of the Denon audio ports and that you have confirmed that audio can be heard from the player through the Denon to your speakers.
 
 =Configuring the Denon=
 To configure the Denon AVP/AVR to work with the plugin you must:
@@ -11,30 +11,30 @@ To configure the Denon AVP/AVR to work with the plugin you must:
   * Have your Denon in Standby mode and not Off
 
 =Installing the Plugin=
-==For [http://www.logitechsqueezebox.com/products/overview.html Squeezebox Server] 7.3 and Greater==
+==For [http://www.mysqueezebox.com/download Logitech Media Server] 7.7 and Greater==
 To install the plugin use the Advanced features in the Settings menu and the enter the value of this link into the plugin extension:
 http://denonavpcontrol.googlecode.com/files/repo.xml
 ==For [http://www.slimdevices.com/pi_features.html SqueezeCenter] 7.0 - 7.2==
-To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your [http://www.logitechsqueezebox.com/ SqueezeCenter] server.  Restart the [http://www.logitechsqueezebox.com/ SqueezeCenter] server for the plugin to be recognized.
+To install the plugin you download the zip file from the Downloads page.  Unzip the file preserving the entire directory structure into the plugins directory of your [http://www.mysqueezebox.com/download Logitech Media Server] server.  Restart the [http://www.mysqueezebox.com/download Logitech Media Server] server for the plugin to be recognized.
 
-To remove the plugin from the server uncheck the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin from the list of Plugins in the [http://www.logitechsqueezebox.com/ SqueezeCenter] web control.
+To remove the plugin from the server uncheck the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin from the list of Plugins in the [http://www.mysqueezebox.com/download Logitech Media Server] web control.
 
 See the [http://www.slimdevices.com/ SlimDevices] website for more information on how to install plugins.
 
 =Configuring the Plugin=
-The [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin is completely configured from the [http://www.logitechsqueezebox.com/products/overview.html Squeezebox Server] Web GUI.  There is nothing to be done on the Squeezebox nor does the Squeezebox have any display associated with the plugin.
+The [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin is completely configured from the [http://www.mysqueezebox.com/download Logitech Media Server] Web GUI.  There is nothing to be done on the Squeezebox nor does the Squeezebox have any display associated with the plugin.
 
-Once the plugin is installed and the [http://www.logitechsqueezebox.com/ Squeezebox Server] has been restarted, you can configure the plugin for your Squeezebox.  Note that you can have as many instances of the plugin as you have Squeezeboxes.  The settings and control of the plugin are specific to each Squeezebox.  However it is suggested that you do not have any more than one Squeezebox control a given AVP/AVR zone.  You could though have multiple Denon amplifiers in your system, all controlled separately by a different Squeezebox and [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin.  Or you could have three Squeezeboxes all controlling one Denon AVP/AVR when used in a multi-zone setting.  The audio menu features of the plugin are only valid for the Main zone of the Denon AVP/AVR.
+Once the plugin is installed and the [http://www.mysqueezebox.com/download Logitech Media Server] has been restarted, you can configure the plugin for your Squeezebox.  Note that you can have as many instances of the plugin as you have Squeezeboxes.  The settings and control of the plugin are specific to each Squeezebox.  However it is suggested that you do not have any more than one Squeezebox control a given AVP/AVR zone.  You could though have multiple Denon amplifiers in your system, all controlled separately by a different Squeezebox and [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin.  Or you could have three Squeezeboxes all controlling one Denon AVP/AVR when used in a multi-zone setting.  The audio menu features of the plugin are only valid for the Main zone of the Denon AVP/AVR.
 
 To configure the plugin:
 
-  * Access the [http://www.slimdevices.com/pi_features.html Squeezebox Server] Web GUI.
+  * Access the [http://www.mysqueezebox.com/download Logitech Media Server] Web GUI.
   * Choose Settings and the player you wish to configure
   * Select the plugins item (tab)
   * Choose *Denon AVP/AVR Control*
 
 ==Enable Plugin==
-You can toggle the use of the plugin on/off without having to remove it from the[http://www.logitechsqueezebox.com/products/overview.html Squeezebox Server].  Check the box and the plugin will be enabled. Unchecking the box and the plugin will ignore any changes made while using the Squeezebox.
+You can toggle the use of the plugin on/off without having to remove it from the[http://www.mysqueezebox.com/download Logitech Media Server].  Check the box and the plugin will be enabled. Unchecking the box and the plugin will ignore any changes made while using the Squeezebox.
 
 ==IP Address of Denon AVP/AVR==
 You must enter the IP address (less the "http://") of your AVP/AVR (for example *127.0.0.1*).  Note for this plugin to work you will need to have a fixed IP address set in your Denon.  You will also need to configure the Denon networking to turn off *Power Saver* mode in the network settings.  Failure to do either of these will result in the plugin not being able to communicate with your Denon amplifier.  See the Denon owners manual for instructions on making these settings.
@@ -62,7 +62,7 @@ If you wish to have the Denon AVP/AVR volume adjust the Squeezebox volume at eac
 
 *If you are using a Touch as your player device you will need to make a modification to enable 100% volume output.  Refer to this forum item for more information: http://forums.slimdevices.com/showthread.php?t=77837 The current version of LMS 7.7.x eliminates the ability to use this feature.  I am looking for a alternative but its probably only going to be fixed in the LMS server by the authors of that program.*
 
-Note that when the amplifier is first started, after about 5 seconds the plugin will match the Squeezebox volume to what is currently set on the AVP/AVR.  The AVP/AVR will not have its volume changed until you adjust it via the Squeezebox or [http://www.logitechsqueezebox.com/products/overview.html Squeezebox Server].  It is suggested that you set the *Volume Control* option of the Squeezebox Audio Settings to *Output level is fixed at 100%*.  This will allow all of your volume settings for the Squeezebox that is configured for this plugin to go directly to the Denon AVP/AVR.  This will also eliminate the Squeezebox from altering your audio signal with its DACs, thus resulting in a purer audio signal.
+Note that when the amplifier is first started, after about 5 seconds the plugin will match the Squeezebox volume to what is currently set on the AVP/AVR.  The AVP/AVR will not have its volume changed until you adjust it via the Squeezebox or [http://www.mysqueezebox.com/download Logitech Media Server].  It is suggested that you set the *Volume Control* option of the Squeezebox Audio Settings to *Output level is fixed at 100%*.  This will allow all of your volume settings for the Squeezebox that is configured for this plugin to go directly to the Denon AVP/AVR.  This will also eliminate the Squeezebox from altering your audio signal with its DACs, thus resulting in a purer audio signal.
 
 ==Enable Audio Settings Menus==
 If you wish to be able to change various audio settings on the DENON AVP/AVR during playback such as surround mode, room equilizer, dynamic equalizer, restorer and dynamic volume, enable this checkbox.  This feature will require a Squeezebox Controller on the native[http://penguinlovesmusic.de/ iPeng 1.21] application running on a iPhone or iPod Touch device.
