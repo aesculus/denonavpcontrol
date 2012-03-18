@@ -41,3 +41,5 @@ V1.8
   * Enhancements to the performance of volume settings and receiver options
 V 1.9
   * Fixes to the label file
+V 1.9.1
+  * Fixes for multi zone feature
