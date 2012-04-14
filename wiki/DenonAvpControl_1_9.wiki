@@ -43,3 +43,5 @@ V 1.9
   * Fixes to the label file
 V 1.9.1
   * Fixes for multi zone feature
+V 1.9.2
+  * Fixes for Quick Select feature when unit already on
