@@ -4,7 +4,7 @@
 		<plugin name="DenonAvpControl" version="1.9.2" minTarget="7.7" maxTarget="*">
 			<title lang="EN">Denon AVP/AVR Control</title>
 			<desc lang="EN">This plugin will control a network ready Denon AVP/AVR from the Logitech Media Server or Squeezebox.  The plugin will turn the Denon device on/off, adjust and synchronize the volumes, and set the Denon audio modes.</desc>
-			<url>https://code.google.com/archive/p/denonavpcontrol/downloads/DenonAvpControl_1_9_2.zip</url>
+			<url>https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/denonavpcontrol/DenonAvpControl_1_9_2.zip</url>
 			<link>http://code.google.com/p/denonavpcontrol/</link>
 			<creator>Chris Couper</creator>
 			<email>1952mgtd@gmail.com</email>
