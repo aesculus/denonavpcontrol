@@ -26,4 +26,4 @@ The plugin has only been tested with the Denon AVP-A1HD and the Squeezebox Recei
   * Supports .5 settings on volume adjustment to Denon
   
 # Installation
-See the installation [instructions here] (https://github.com/aesculus/denonavpcontrol/blob/master/wiki/InstallationInstructions.wiki)
+See the installation [instructions here](https://github.com/aesculus/denonavpcontrol/blob/master/wiki/InstallationInstructions.wiki)
