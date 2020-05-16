@@ -45,3 +45,5 @@ V 1.9.1
   * Fixes for multi zone feature
 V 1.9.2
   * Fixes for Quick Select feature when unit already on
+V 2.0
+  * Adds Quick Select delay when powering on AVP/AVR
