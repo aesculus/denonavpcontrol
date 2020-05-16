@@ -34,7 +34,7 @@ See [How to Use](https://github.com/aesculus/denonavpcontrol/blob/master/wiki/Ho
 
 The MIT License
 
-Copyright (c) 2008-2019, Christopher Couper and contributors
+Copyright (c) 2008-2020, Christopher Couper and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
