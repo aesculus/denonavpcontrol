@@ -17,9 +17,9 @@ The plugin has only been tested with the Denon AVP-A1HD and the Squeezebox Recei
   * Sets the Squeezebox volume to the default setting of the Denon amplifier when turned on
   * Optionally sets one of the three Denon Quick Select modes when turned on
   * The user specifies the maximum volume the amplifier can be set to
-  * The user can pick an optional on and/or off delay timer
+  * The user can pick an optional on and/or off delay timer as well as Quick Select timer
   * The plugin can be enabled/disabled without restarting the LMS
-  * The user can select between Main, Zone 2 and Zone 3
+  * The user can select between Main, Zone 2, Zone 3 and Zone 4
   * Optionally the plugin can set the Squeezebox volume from the amplifier volume at track changes
   * Added the ability to control the DENON audio settings using the iPeng application during playback.
   * Supports 100% volume setting on players with iPeng 1.2.5 and greater.  Volume control has been changed to be less linear with more loudness in the lower settings.
