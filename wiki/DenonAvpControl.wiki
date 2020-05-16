@@ -1,4 +1,3 @@
-# labels Featured
 A [http://www.mysqueezebox.com/download Logitech Media Server] plugin to control the Denon AVP/POA and networked AVRs from the [http://www.mysqueezebox.com/download Logitech Media Server] and 
 SqueezeBox Classic, Receiver, Radio and Touch.
 
