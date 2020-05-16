@@ -46,6 +46,9 @@ Enter the number of seconds you want to wait for after the Squeezebox is turned 
 ==Delay to put AVP/AVR in Standby==
 Enter the number of seconds you want to wait for after the Squeezebox is turned off before the AVP/AVR is put into standby.  If you change the state (ie turn it on) within this period, the plugin will not send the command to the amplifier and it will be essentially cancelled.  The default is zero seconds.
 
+==Delaty for Quick Select==
+Enter the number of seconds that you want the plugin to wait after powering on the AVP/AVR if a Quick Select has been chosen.
+
 ==Quick Select Option==
 Select which Quick Select option you would like the AVP to switch to when turning on the Squeezebox from the pull-down.  Choosing *Disabled* means the plugin will ignore this feature.  Note you must have preconfigured your Denon amplifier for the selected Quick Select option for this to be effective.  After four seconds from a Power On command the plugin will request the amplifier to select one of the three Quick Select options, if configured.
 
