@@ -1,4 +1,3 @@
-#labels Configure,Settings,Installation,Featured
 This page describes how to install and configure the [https://github.com/aesculus/denonavpcontrol Denon AVP/AVR Control] plugin for the [http://www.mysqueezebox.com/download Logitech Media Server].
 =Setting Up the Squeezebox Player=
 This plugin assumes that your Squeezebox player is connected to the AVP/AVR via a digital connection to one of the Denon audio ports and that you have confirmed that audio can be heard from the player through the Denon to your speakers.
@@ -46,7 +45,7 @@ Enter the number of seconds you want to wait for after the Squeezebox is turned 
 ==Delay to put AVP/AVR in Standby==
 Enter the number of seconds you want to wait for after the Squeezebox is turned off before the AVP/AVR is put into standby.  If you change the state (ie turn it on) within this period, the plugin will not send the command to the amplifier and it will be essentially cancelled.  The default is zero seconds.
 
-==Delaty for Quick Select==
+==Delay for Quick Select==
 Enter the number of seconds that you want the plugin to wait after powering on the AVP/AVR if a Quick Select has been chosen.
 
 ==Quick Select Option==
