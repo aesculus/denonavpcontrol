@@ -1,8 +1,9 @@
-This page describes how to use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.mysqueezebox.com/download Logitech Media Server].  Optionally the plugin provides a very rich user experience when combined with the native iTouch application, [http://penguinlovesmusic.de/ iPeng].
+This page describes how to use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin for the [http://www.mysqueezebox.com/download Logitech Media Server].  Optionally the plugin provides a very rich user experience when combined with a native iTouch application, [http://penguinlovesmusic.de/ iPeng]. The plugin is also supported using native Android applications such as Squeezer and Squeeze Ctrl.
 =Using the Plugin=
-First you must install the plugin as described in the [http://code.google.com/p/denonavpcontrol/wiki/InstallationInstructions installation] wiki page.  Secondly if using the [http://penguinlovesmusic.de/ iPeng] application you must install that application on your iTouch device too.
+First you must install the plugin as described in the [http://code.google.com/p/denonavpcontrol/wiki/InstallationInstructions installation] wiki page.  Secondly if using the [http://penguinlovesmusic.de/ iPeng] application you must install that application on your iTouch device too or installing the native Android LMS applications Squeezer or Squeeze Ctrl.
 
-Once the plugin (and [http://penguinlovesmusic.de/ iPeng]) is installed, it is fairly straight forward to use, and in many cases there is nothing that you need to be aware of during use. The application is completely transparent with the exception of the optional audio settings adjustments during playback.
+Once the plugin native application(s) is installed, it is fairly straight forward to use, and in many cases there is nothing that you need to be aware of during use. The application is completely transparent with the exception of the optional audio settings adjustments during playback.
+
 ==Normal Operation==
 Once the plugin has been installed and configured it is very simple and transparent to use.  Make sure your DENON AVP/AVR is in Standby mode and connected to the network (wired or wirelessly).  
 ===Turning On the Systems===
@@ -12,7 +13,7 @@ To play a track simply use your Squeezebox remote or the [http://www.mysqueezebo
 ===Changing the Volume===
 If you change the volume using the Squeezebox remote or the Squeezebox Server Web GUI the plugin will capture your changes and automatically send these to the DENON AVP/AVR.  There is about a half second delay between the Squeezebox and the DENON AVP/AVR built into the plugin to keep the Squeezebox from making unessessary adjustments to the DENON.
 
-Optionally if you have selected the ability for the DENON AVP/AVR to send new volume changes the user might have made directly to the AVP/AVR, this will occur at every track change.
+Optionally if you have selected the ability for the DENON AVP/AVR to send new volume changes the user might have made directly to the AVP/AVR, this will occur at every track change or pause in the player.
 ===Turing Off the Systems===
 When you are done with the Squeezebox and the DENON AVP/AVR simply use your Squeezebox remote or the Squeezebox Server Web GUI and turn off the player. The DENON AVP/AVR will automatically go into Standby mode.
 =Operation With the Native iPeng Application and an iTouch Device==
