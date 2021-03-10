@@ -16,7 +16,7 @@ If you change the volume using the Squeezebox remote or the Squeezebox Server We
 Optionally if you have selected the ability for the DENON AVP/AVR to send new volume changes the user might have made directly to the AVP/AVR, this will occur at every track change or pause in the player.
 ===Turing Off the Systems===
 When you are done with the Squeezebox and the DENON AVP/AVR simply use your Squeezebox remote or the Squeezebox Server Web GUI and turn off the player. The DENON AVP/AVR will automatically go into Standby mode.
-=Operation With the Native iPeng Application and an iTouch Device==
+=Operation With the Native iPeng Application and an iTouch Device=
 For an advanced user experience with the Squeezebox I highly recommend the native [http://penguinlovesmusic.de/ iPeng] application and an iTouch device.  This section will describe how to use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin with the [http://penguinlovesmusic.de/ iPeng] application.
 ===Turning On and Off the Systems===
 There is no change in how you would use the [http://code.google.com/p/denonavpcontrol/ Denon AVP/AVR Control] plugin with [http://penguinlovesmusic.de/ iPeng] than you would with the Squeezebox natively.  Simply select the player that the plugin is configured for and press the Squeezebox player icon at the bottom of the Now Playing screen.  When turned on the player icon will be highlighted.
