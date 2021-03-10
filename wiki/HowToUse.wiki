@@ -28,7 +28,7 @@ Note that if your player is off and you press the Play (>) icon, the pluging wil
 
 To turn the sytem off just select the player icon. It will become unhighlighted and the Denon AVP/AVR will automatically go into Standby mode.  
 
-[[https://raw.githubusercontent.com/aesculus/denonavpcontrol/master/wiki/DenonAvpControl.jpg]]
+[[https://raw.githubusercontent.com/aesculus/denonavpcontrol/master/wiki/DenonAvpControl.jpeg]]
 [[https://raw.githubusercontent.com/aesculus/denonavpcontrol/master/wiki/DenonAvpControlNowPlaying.jpg]]
 
 ===Making Adjustments to Volume===
