@@ -14,6 +14,9 @@ To play a track simply use your Squeezebox remote or the [http://www.mysqueezebo
 If you change the volume using the Squeezebox remote or the Squeezebox Server Web GUI the plugin will capture your changes and automatically send these to the DENON AVP/AVR.  There is about a half second delay between the Squeezebox and the DENON AVP/AVR built into the plugin to keep the Squeezebox from making unessessary adjustments to the DENON.
 
 Optionally if you have selected the ability for the DENON AVP/AVR to send new volume changes the user might have made directly to the AVP/AVR, this will occur at every track change or pause in the player.
+
+*Note: If you are using the Android native app Squeeze Ctrl, to control the player and you want to use the 100% volume feature, you will have to make a change to that apps settings. Go to Preferences > Controls > Fixed Volume Send Command.
+
 ===Turing Off the Systems===
 When you are done with the Squeezebox and the DENON AVP/AVR simply use your Squeezebox remote or the Squeezebox Server Web GUI and turn off the player. The DENON AVP/AVR will automatically go into Standby mode.
 =Operation With the Native iPeng Application and an iTouch Device=
