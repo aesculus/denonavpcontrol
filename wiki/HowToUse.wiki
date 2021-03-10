@@ -28,8 +28,8 @@ Note that if your player is off and you press the Play (>) icon, the pluging wil
 
 To turn the sytem off just select the player icon. It will become unhighlighted and the Denon AVP/AVR will automatically go into Standby mode.  
 
-[[https://github.com/aesculus/denonavpcontrol/blob/master/wiki/DenonAvpControl.jpg]]
-[[https://github.com/aesculus/denonavpcontrol/blob/master/wiki/DenonAvpControlNowPlaying.jpg]]
+[[https://github.com/aesculus/denonavpcontrol/blob/master/wiki/DenonAvpControl.jpg?raw=true|alt=screen]]
+[[https://github.com/aesculus/denonavpcontrol/blob/master/wiki/DenonAvpControlNowPlaying.jpg?raw=true|alt=screen]]
 
 ===Making Adjustments to Volume===
 Simply move the slider on iPeng to the desired audio level and the plugin will calculate the necessary volume on the DENON AVP/AVR and set it accordingly.  This will work in either the invidual volume control (second picture) or when grouped (synched with other players - first picture).
