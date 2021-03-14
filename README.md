@@ -29,7 +29,7 @@ The plugin has only been tested with the Denon AVP-A1HD and the Squeezebox Recei
 See the [Installation Instructions](https://github.com/aesculus/denonavpcontrol/blob/master/wiki/InstallationInstructions.wiki)
 
 # How to Use
-See [How to Use](https://github.com/aesculus/denonavpcontrol/blob/master/wiki/HowToUse.wiki)
+See [How to Use](https://github.com/aesculus/denonavpcontrol/wiki/How-to-Use)
 ## Licence
 
 The MIT License
