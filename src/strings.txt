@@ -1,0 +1,301 @@
+# Strings for DENONAVPCONTROL
+PLUGIN_DENONAVPCONTROL
+	EN	DenonAvpControl
+	DE	DenonAvpControl
+
+PLUGIN_DENONAVPCONTROL_MODULE_NAME
+	EN	DENON AVP/AVR Control
+	DE	DENON AVP/AVR Control
+
+PLUGIN_DENONAVPCONTROL_DESCRIPTION
+	EN	This plugin will control a network ready DENON AVP/AVR from the SqueezeCenter or Squeezebox.  The plugin will turn the DENON device on/off, adjust and synchronize the volumes.
+	DE	Dieses Plugin steuert einen DENON AVP/AVR mit Netzwerkunterstützung aus SqueezeCenter oder von einer Squeezebox. Das Plugin kann das DENON Gerät ein/aus schalten sowie die Lautstärke regeln und synchronisieren.
+
+PLUGIN_DENONAVPCONTROL_BASIC_SETTINGS_HEADER
+	EN	Changes made here effect the functionality of the DENON AVP/AVR Control plugin.
+	DE	Änderungen hier betreffen die Funktionen des Plugins DENON AVP/AVR Control
+
+PLUGIN_DENONAVPCONTROL_SAVE
+	EN	You must restart the server for these changes to take effect.
+	DE	You must restart the server for these changes to take effect.
+	
+PLUGIN_DENONAVPCONTROL_ENABLED
+	EN	Enable plugin?
+	DE	Plugin verwenden?
+
+PLUGIN_DENONAVPCONTROL_ENABLED_DESC
+	EN	If you wish to turn on the DENON AVP/AVR when the Squeezebox is turned on or played and put in standby when the Squeezebox is turned off, enable this checkbox.
+	DE	Wenn Sie den DENON AVP/AVR einschalten wollen wenn die Squeezebox eingeschaltet ist oder spielt und ihn in den Standby-Modus versetzen wollen, wenn die Squeezebox aus ist, aktivieren Sie dieses Feld.
+
+PLUGIN_DENONAVPCONTROL_AUDIOMENU_ENABLED
+	EN	Enable audio settings menus?
+	DE	Menüs für Audioeinstellungen verwenden?
+
+PLUGIN_DENONAVPCONTROL_AUDIOMENU_ENABLED_DESC
+	EN	If you wish to be able to change various audio settings on the DENON AVP/AVR during playback such as surround mode, room equalizer, dynamic equalizer, restorer and dynamic volume, enable this checkbox.  This feature will require a Squeezebox Controller on the native iPeng application running on a iPhone or iPod Touch device.
+	DE	Schalten Sie diese Option ein, wenn Sie verschiedene Audio-Einstellungen des DENON AVP/AVR während der Wiedergabe ändern können wollen, z.B. Surround-Mode, Raumkorrektur-Equalizer, Dynamischen Equalizer, Compressed Audio Restorer und dynamische Lautstärkeanpassung. Diese Funktion benötigt einen Squeezebox Controller oder die iPeng App auf einem iPhone oder iPod Touch.
+
+PLUGIN_DENONAVPCONTROL_VOLSYNCH_ENABLED
+	EN	Enable synching the volume?
+	DE	Lautstärkensynchronisation einschalten?
+
+PLUGIN_DENONAVPCONTROL_VOLSYNCH_ENABLED_DESC
+	EN	If you wish to have the DENON AVP/AVR volume adjust the Squeezebox volume at each track change, enable this checkbox.  This will allow volume changes on the Denon to change the Squeezebox volume indicator.  Only available for the Main zone.
+	DE	Schalten Sie diese Funktion ein, um bei jedem Titelwechsel die Lautstärke der Squeezebox an die Lautstärke des DENON AVP/AVR anzupassen. Dadurch wird es möglich, dass Lautstärkenänderungen auf dem Denon-Gerät von der Lautstärkeanzeige der Squeezebox angezeigt werden. Nur für die Hauptzone verfügbar.
+
+PLUGIN_DENONAVPCONTROL_QUICK1
+	EN	Quick Select 1
+	DE	Quick Select 1
+
+PLUGIN_DENONAVPCONTROL_QUICK2
+	EN	Quick Select 2
+	DE	Quick Select 2
+
+PLUGIN_DENONAVPCONTROL_QUICK3
+	EN	Quick Select 3
+	DE	Quick Select 3
+
+PLUGIN_DENONAVPCONTROL_QUICKSELECT
+	EN	Quick Select Option
+	DE	Quick Select Funktion
+
+PLUGIN_DENONAVPCONTROL_QUICKSELECT_DESC
+	EN	Select which Quick Select option you would like the DENON AVP/AVR to switch to when turning on the Squeezebox.
+	DE	Wählen Sie aus, welche Quick-Select-Option der DENON AVP/AVR auswählen soll, wenn die Squeezebox eingeschaltet wird.
+
+PLUGIN_DENONAVPCONTROL_ZONE1
+	EN	Main
+	DE	Hauptzone
+
+PLUGIN_DENONAVPCONTROL_ZONE2
+	EN	Zone 2
+	DE	Zone 2
+
+PLUGIN_DENONAVPCONTROL_ZONE3
+	EN	Zone 3
+	DE	Zone 3
+
+PLUGIN_DENONAVPCONTROL_ZONE4
+	EN	Zone 4
+	DE	Zone 4
+
+PLUGIN_DENONAVPCONTROL_ZONE
+	EN	Zone Option
+	DE	Zonenauswahl
+
+PLUGIN_DENONAVPCONTROL_ZONE_DESC
+	EN	Select which zone you would like the DENON AVP/AVR to control.
+	DE	Wählen Sie aus, welche Zone der DENON AVP/AVR steuern soll.
+
+PLUGIN_DENONAVPCONTROL_AVPADDRESS
+	EN	IP Address of Denon AVP/AVR
+	DE	IP-Adresse des Denon AVP/AVR
+
+PLUGIN_DENONAVPCONTROL_AVPADDRESS_DESC
+	EN	Enter the IP Address of DENON AVP/AVR.  Note this plugin will only work for fixed IP addresses.
+	DE	Geben Sie die IP-Adresse des DENON AVP/AVR ein. Achtung: Dieses Plugin funktioniert nur mit festen IP-Adressen.
+
+PLUGIN_DENONAVPCONTROL_ONDELAY
+	EN	Delay to turn DENON AVP/AVR on
+	DE	Verzögerung beim Einschalten des DENON AVP/AVR
+
+PLUGIN_DENONAVPCONTROL_ONDELAY_DESC
+	EN	Enter the number of seconds you want to wait for after the Squeezebox is turned on before the DENON AVP/AVR is activated.
+	DE	Geben Sie ein, wie viele Sekunden Sie nach dem Einschalten der Squeezebox warten wollen, before der DENON AVP/AVR eingeschaltet wird.
+
+PLUGIN_DENONAVPCONTROL_OFFDELAY
+	EN	Delay to put DENON AVP/AVR in Standby
+	DE	Verzögerung, bevor der DENONE AVP/AVR in den Standby-Modus geschaltet wird.
+
+PLUGIN_DENONAVPCONTROL_OFFDELAY_DESC
+	EN	Enter the number of seconds you want to wait for after the Squeezebox is turned off before the DENON AVP/AVR is placed in Standby.
+	DE	Geben Sie die Anzahl der Sekunden ein, die Sie nach dem Ausschalten der Squeezebox warten wollen, bevor der DENON AVP/AVR in den Standby-Modus geschaltet wird.
+
+PLUGIN_DENONAVPCONTROL_QUICKDELAY
+	EN	Delay to set the Quick Select choice
+	DE	Verzˆgerung zum Einstellen der Schnellauswahl
+
+PLUGIN_DENONAVPCONTROL_QUICKDELAY_DESC
+	EN	Enter the number of seconds you want to wait for after the Squeezebox is turned on before the Quick select is activated.
+	DE	Geben Sie die Anzahl der Sekunden ein, auf die Sie warten mˆchten, nachdem die Squeezebox eingeschaltet wurde, bevor die Schnellauswahl aktiviert wird.
+
+PLUGIN_DENONAVPCONTROL_MAXVOL
+	EN	Maximum volume of DENON AVP/AVR
+	DE	Maximale Lautstärke des DENON AVP/AVR
+
+PLUGIN_DENONAVPCONTROL_MAXVOL_DESC
+	EN	Enter the maximum volume you want the plugin to adjust the DENON AVP/AVR too when making volume adjustments.  100% volume at the Squeezebox will be limited to this value on the DENON AVP/AVR.
+	DE	Geben Sie die maximale Lautstärke ein, auf die das Plugin den DENON AVP/AVR regelt, wenn Sie die Lautstärke anpassen. 100% Lautstärke auf der Squeezebox entspricht diesem Wert auf dem DENON AVP/AVR.
+
+PLUGIN_DENONAVPCONTROL_AUDIO1
+	EN	Surround Mode
+	DE	Surround Modus
+
+PLUGIN_DENONAVPCONTROL_AUDIO2
+	EN	Room Equalizer
+	DE	Raumkorrektur Equalizer
+
+PLUGIN_DENONAVPCONTROL_AUDIO3
+	EN	Dynamic Equalizer
+	DE	Dynamischer Equalizer
+
+PLUGIN_DENONAVPCONTROL_AUDIO4
+	EN	Dynamic Volume
+	DE	Dynamische Lautstärke
+
+PLUGIN_DENONAVPCONTROL_AUDIO5
+	EN	Audio Restorer
+	DE	Audio Restorer
+
+PLUGIN_DENONAVPCONTROL_AUDIO6
+	EN	Reference Level Offset
+	DE	Referenzpegeloffset
+
+PLUGIN_DENONAVPCONTROL_SURMD1
+	EN	Direct
+	DE	Direct-Modus
+
+PLUGIN_DENONAVPCONTROL_SURMD2
+	EN	Pure Direct
+	DE	Pure-Direct-Modus
+
+PLUGIN_DENONAVPCONTROL_SURMD3
+	EN	Stereo
+	DE	Stereo
+
+PLUGIN_DENONAVPCONTROL_SURMD4
+	EN	Standard
+	DE	Standard
+
+PLUGIN_DENONAVPCONTROL_SURMD5
+	EN	Dolby Digital
+	DE	Dolby Digital
+
+PLUGIN_DENONAVPCONTROL_SURMD6
+	EN	DTS Surround
+	DE	DTS Surround
+
+# Is this really "Neural" and not "Neutral". Didn't find it in the docs
+PLUGIN_DENONAVPCONTROL_SURMD7
+	EN	Neural
+	DE	Neural
+
+PLUGIN_DENONAVPCONTROL_SURMD8
+	EN	Dolby H/P
+	DE	Dolby H/P
+
+PLUGIN_DENONAVPCONTROL_SURMD9
+	EN	Home THX Cinema
+	DE	THX Cinema
+
+PLUGIN_DENONAVPCONTROL_SURMD10
+	EN	Wide Screen
+	DE	Wide Screen
+
+PLUGIN_DENONAVPCONTROL_SURMD11
+	EN	5/7 Channel Stereo
+	DE	5/7 Kanal Stereo
+
+PLUGIN_DENONAVPCONTROL_SURMD12
+	EN	Super Stadium
+	DE	Super Stadium
+
+PLUGIN_DENONAVPCONTROL_SURMD13
+	EN	Rock Arena
+	DE	Rock Arena
+
+PLUGIN_DENONAVPCONTROL_SURMD14
+	EN	Jazz Club
+	DE	Jazz Club
+
+PLUGIN_DENONAVPCONTROL_SURMD15
+	EN	Classic Concert
+	DE	Classic Konzert
+
+PLUGIN_DENONAVPCONTROL_SURMD16
+	EN	Mono Movie
+	DE	Mono Film
+
+PLUGIN_DENONAVPCONTROL_SURMD17
+	EN	Matrix
+	DE	Matrix
+
+PLUGIN_DENONAVPCONTROL_SURMD18
+	EN	Video Game
+	DE	Videospiel
+
+PLUGIN_DENONAVPCONTROL_RMEQ1
+	EN	Audyssey
+	DE	Audyssey
+
+PLUGIN_DENONAVPCONTROL_RMEQ2
+	EN	Audyssey Bypass L/R
+	DE	Audyssey Bypass L/R
+
+PLUGIN_DENONAVPCONTROL_RMEQ3
+	EN	Audyssey Flat
+	DE	Audyssey Flat
+
+PLUGIN_DENONAVPCONTROL_RMEQ4
+	EN	Manual
+	DE	Manuell
+
+PLUGIN_DENONAVPCONTROL_RMEQ5
+	EN	Off
+	DE	Aus
+
+PLUGIN_DENONAVPCONTROL_NIGHT1
+	EN	Dynamic Vol. Setting = Midnight
+	DE	Dynamische Laustärke = Mitternacht
+
+PLUGIN_DENONAVPCONTROL_NIGHT2
+	EN	Dynamic Vol. Setting = Evening
+	DE	Dynamische Lautstärke = Abend
+
+PLUGIN_DENONAVPCONTROL_NIGHT3
+	EN	Dynamic Vol. Setting = Day
+	DE	Dynamische Lautstärke = Tag
+
+PLUGIN_DENONAVPCONTROL_REST1
+	EN	Restorer Off
+	DE	Restorer Aus
+
+PLUGIN_DENONAVPCONTROL_REST2
+	EN	Restorer 64
+	DE	Restorer 64
+
+PLUGIN_DENONAVPCONTROL_REST3
+	EN	Restorer 96
+	DE	Restorer 96
+
+PLUGIN_DENONAVPCONTROL_REST4
+	EN	Restorer HQ
+	DE	Restorer HQ
+
+PLUGIN_DENONAVPCONTROL_DYNVOL1
+	EN	Dynamic EQ and Volume Off
+	DE	Dynamischer EQ und -Lautstärke Aus
+
+PLUGIN_DENONAVPCONTROL_DYNVOL2
+	EN	Dynamic EQ On
+	DE	Dynamischer EQ Ein
+
+PLUGIN_DENONAVPCONTROL_DYNVOL3
+	EN	Dynamic EQ and Volume On
+	DE	Dynamischer EQ und -Laustärke Ein
+
+PLUGIN_DENONAVPCONTROL_REF_LEVEL0
+	EN	Reference Level Offset=0db
+	DE	Referenzpegeloffset=0db
+
+PLUGIN_DENONAVPCONTROL_REF_LEVEL5
+	EN	Reference Level Offset=5db
+	DE	Referenzpegeloffset=5db
+
+PLUGIN_DENONAVPCONTROL_REF_LEVEL10
+	EN	Reference Level Offset=10db
+	DE	Referenzpegeloffset=10db
+
+PLUGIN_DENONAVPCONTROL_REF_LEVEL15
+	EN	Reference Level Offset=15db
+	DE	Referenzpegeloffset=15db
