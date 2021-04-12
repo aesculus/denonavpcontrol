@@ -54,7 +54,7 @@ my $log = Slim::Utils::Log->addLogCategory({
 		'MSSTANDARD',
 		'MSDOLBY DIGITAL',
 		'MSDTS SURROUND',
-		'MSNEURAL',
+		'MSMCH STEREO',
 		'MSDOLBY H/P',
 		'MSHOME THX CINEMA',
 		'MSWIDE SCREEN',
@@ -65,7 +65,8 @@ my $log = Slim::Utils::Log->addLogCategory({
 		'MSCLASSIC CONCERT',
 		'MSMONO MOVIE',
 		'MSMATRIX',
-		'MSVIDEO GAME'
+		'MSVIDEO GAME',
+		'MSVIRTUAL'
 		);
 	my @roomModes = ( # the avp room equilizer modes
 		'PSROOM EQ:AUDYSSEY',
@@ -137,6 +138,7 @@ sub SendNetAvpVolSetting {
 	my $url = shift;
 
 	my $request = "MV?" . $CR ;
+#	writemsg($request, $client, $url, 2);
 	writemsg($request, $client, $url);
 }
 
@@ -235,16 +237,59 @@ sub SendTimerLoopRequest {
 
 	if ($gGetPSModes == 2) {
 		$request= "PSROOM EQ: ?" . $CR ;
-	}elsif ($gGetPSModes == 3) {
+	} elsif ($gGetPSModes == 3) {
 		$request= "PSDYN ?" . $CR ;
-	}elsif ($gGetPSModes == 4) {
+	} elsif ($gGetPSModes == 4) {
 		$request= "PSDYNSET ?" . $CR ;
-	}elsif ($gGetPSModes == 5) {
+	} elsif ($gGetPSModes == 5) {
 		$request= "PSRSTR ?" . $CR ;
+	} elsif ($gGetPSModes == 6) {
+		$request= "PSREFLEV ?" . $CR ;
 	} else {
 		$gGetPSModes = -1; #cancel it, we are done	
 	}
 	writemsg($request, $client, $url);	  
+}
+
+# ----------------------------------------------------------------------------
+sub SendNetAvpMuteStatus {
+	my $client = shift;
+	my $url = shift;
+	my $timeout = 1;
+	my $request = "MU?" . $CR ;	
+
+	$log->debug("Calling query for mute status");	
+	writemsg($request, $client, $url, $timeout);
+}
+
+# ----------------------------------------------------------------------------
+sub SendNetAvpMuteToggle {
+	my $client = shift;
+	my $url = shift;
+	my $zone = shift;
+	my $muteToggle = shift;
+	my $timeout = 1;
+	my $request;
+	
+	if ($zone == 0 ) {
+		$request= "" ;
+	} elsif ($zone == 1 ) {
+		$request= "Z2" ;
+	} elsif ($zone == 2 ) {
+		$request= "Z3" ;
+	} else {
+		$request = "Z4" ;
+	}
+
+	if ($muteToggle == 1) {
+		$request = $request . "MUON" . $CR ;
+	}
+	else {
+		$request = $request . "MUOFF" . $CR ;
+	}
+	
+	$log->debug("Calling writemsg for Mute command");	
+	writemsg($request, $client, $url, $timeout);
 }
 
 # ----------------------------------------------------------------------------
@@ -253,7 +298,8 @@ sub SendNetAvpPowerStatus {
 	my $url = shift;
 	my $zone = shift;
 	my $request;
-	my $timeout = 1;
+#	my $timeout = 1;
+	my $timeout = 2;
 
 	$log->debug("Calling query for zone state");	
 	if ($zone == 0 ) {
@@ -274,7 +320,8 @@ sub SendNetAvpOn {
 	my $url = shift;
 	my $zone = shift;
 	my $request;
-	my $timeout = 1;
+#	my $timeout = 1;
+	my $timeout = 2;
 
 	$log->debug("Calling writemsg for On command");	
 	if ($zone == 0 ) {
@@ -314,11 +361,20 @@ sub SendNetAvpQuickSelect {
 	my $client = shift;
 	my $url = shift;
 	my $quickSelect = shift;
+	my $zone = shift;
+	my $request;
+	my $timeout = 5;
 
 	$log->debug("Calling writemsg for quick select command");	
-	my $request= "MSQUICK" . $quickSelect . $CR;
-#	my $request= "MV55" . $CR ;
-	writemsg($request, $client, $url);
+	if ($zone == 0 ) {
+		$request = "MS";
+	} else {
+		$zone++;
+		$request = "Z" . $zone;
+	}
+	$request = $request . "QUICK" . $quickSelect . $CR;
+	$log->debug("Request is: " . $request);
+	writemsg($request, $client, $url, $timeout);
 }
 
 # ----------------------------------------------------------------------------
@@ -334,7 +390,9 @@ sub writemsg {
 	my @pass = [ $request, $client ];
 
 	if (!$timeout) {
-		$timeout = .125;
+#		$timeout = .125;
+		$timeout = .500;
+		
 	}
 
 	$self->write_async( {
@@ -357,13 +415,24 @@ sub _error {
 	my $url   = shift;
 	my $track = shift;
 	my $args  = shift;
+	
 	$log->debug("error routine called");
 
-	$gGetPSModes = 0; # we had an error so cancel anymore outstanding requests
-	$self->disconnect;
-
+	my @track = @$track;
+	my $request = @track[0];
+	my $client = @track[1];
+	
 	my $error = "error connecting to url: error=$errormsg url=$url";
 	$log->warn($error);
+	
+	$self->disconnect;
+	
+	if ($request =~ m/PW\?\r/ || $request =~ m/Z\d\?\r/) {	# power status timed out
+		$log->debug("Calling HandlePowerOn\n");	
+		$classPlugin->handlePowerOn($client);
+	} else {		
+		$gGetPSModes = 0; # we had an error so cancel anymore outstanding requests
+	}
 }
 
 sub getCRLine($$) {
@@ -382,6 +451,30 @@ sub getCRLine($$) {
 	return $buffer;
 }
 
+sub clearbuf($) {
+	my $socket = shift;
+	my $maxWait = shift;
+	my $c;
+	my $r;
+	my $i = 0;
+	my $start = Time::HiRes::time();
+
+	if (!$maxWait) {
+		$maxWait = 1;
+	}
+	
+	$log->debug("clearbuf routine called");
+	do {
+		$r = $socket->read($c,1);
+		if ($r) {
+			$i++;
+		}
+	}
+	while ( (Time::HiRes::time() - $start) < $maxWait );
+	
+	$log->debug("clearbuf cleared ".$i." bytes\n");
+}	
+	
 # ----------------------------------------------------------------------------
 sub _read {
 	my $self  = shift;
@@ -402,8 +495,9 @@ sub _read {
 	my $callbackError; 	# the returned message when the command was not successful
 
 	$log->debug("read routine called");
-$buf = &getCRLine($self->socket,.125);
-my $read = length($buf);
+	$buf = &getCRLine($self->socket,.125);
+	my $read = length($buf);
+	
 #	my $read = sysread($self->socket, $buf, 1024); # do our own sysread as $self->socket->sysread assumes http
 #	my $read = sysread($self->socket, $buf, 135); # do our own sysread as $self->socket->sysread assumes http
 
@@ -419,12 +513,12 @@ my $read = length($buf);
 	$log->debug("Buffer read ".$buf."\n");
 	$log->debug("Client name: " . $client->name . "\n");	
 
-#	if ($gGetPSModes == -1 || $gGetPSModes == 5) {
-#		$log->debug("Disconnecting Comms Session. gGetPSModes:" . $gGetPSModes . "\n");		
-#		Slim::Utils::Timers::killTimers( $client, \&SendTimerLoopRequest);
-#		$self->disconnect;
-#		$gGetPSModes =0;
-#	}
+	if ($gGetPSModes == -1 || $gGetPSModes == 6) {
+		$log->debug("Disconnecting Comms Session. gGetPSModes:" . $gGetPSModes . "\n");		
+		Slim::Utils::Timers::killTimers( $client, \&SendTimerLoopRequest);
+		$self->disconnect;
+		$gGetPSModes =0;
+	}
 
 	# see what is coming back from the AVP
 	my $command = substr($request,0,3);
@@ -433,42 +527,81 @@ my $read = length($buf);
 	$log->debug("Subcommand is:" .$command. "\n");
 	if ($request =~ m/PWON\r/ || $request =~ m/PW\?\r/) {	# power on or status
 		if ($buf eq 'PWON'. $CR) {
+#			&clearbuf($self->socket);
 			$self->disconnect;
 			$log->debug("Calling HandlePowerOn2\n");	
 			$classPlugin->handlePowerOn2($client);
 		} elsif ($buf eq 'PWSTANDBY'. $CR) {
+			$self->disconnect;
 			$log->debug("Calling HandlePowerOn\n");	
 			$classPlugin->handlePowerOn($client);
 		}
-	} elsif ($request =~ m/Z\d\?\r/) {	# zone power on
-		$log->debug("Calling HandlePowerOn for Zone\n");	
-		$classPlugin->handlePowerOn($client);
-	} elsif (substr($request,0,7) eq 'MSQUICK') { # quick setting
+	} elsif ($request =~ m/Z\d\ON\r/ || $request =~ m/Z\d\?\r/) {	# zone power on or status
+		if ($buf =~ m/Z\d\ON\r/) {	# zone is on
+			$self->disconnect;
+			$log->debug("Zone is powered on\n");
+			$log->debug("Calling HandlePowerOn2\n");	
+			$classPlugin->handlePowerOn2($client);
+		}
+		elsif ($buf =~ m/Z\d\OFF\r/) {	 # zone is off
+			$self->disconnect;
+			$log->debug("Calling HandlePowerOn for Zone\n");	
+			$classPlugin->handlePowerOn($client);
+		}	
+#	} elsif (substr($request,0,7) eq 'MSQUICK') { # quick setting
+	} elsif ($request =~ m/(MS|Z[2-4])QUICK\d\r/) {	# quick setting	
 		if ($buf eq 'PWON'. $CR) {
+#			&clearbuf($self->socket,5);
 			$self->disconnect;
-			SendNetAvpVolSetting($client, $url);
-		}
-	} elsif ($request =~ m/PWSTANDBY\r/) { #standby
-		$log->debug("Disconnect socket after Standby"."\n");
-		if ($buf eq 'PWSTANDBY'. $CR) {
-			$self->disconnect;
-		}
-	} elsif ($request =~ m/MV\?/) {
-			$log->debug("Volume setting inquiry"."\n");
+			$classPlugin->handleVolReq($client);
+		} elsif ($buf =~ m/(MV|Z[2-4])\d\d/) {	# see if the element is a volume
 			$event = substr($buf,0,2);
-			if ($event eq 'MV') { #check to see if the element is a volume
+			if ( ($event eq 'MV' && substr($request,0,2) eq 'MS') || 
+				  $event eq substr($request,0,2)) {   # make sure it's our volume
 				$subEvent = substr($buf,2,3);
-			  if ($subEvent eq 'MAX') { # its not the one that tells us the volume change
-					$self->disconnect;		
-				} else {
-					# call the plugin routine to deal with the volume
-					$classPlugin->updateSqueezeVol($client, $subEvent);
-				}
+				# call the plugin routine to deal with the volume
+#				&clearbuf($self->socket,5);
+				$self->disconnect;		
+				$classPlugin->updateSqueezeVol($client, $subEvent, 1);				 
 			}
-	} elsif ($request =~ m/MV/) {
-			$log->debug("Process Volume Setting"."\n");
+		}
+	} elsif ($request =~ m/PWSTANDBY\r/ || $request =~ m/Z\d\OFF\r/ ) { #standby
+#		if ($buf eq 'PWSTANDBY'. $CR) {
+			$log->debug("Disconnect socket after Standby"."\n");
 			$self->disconnect;
-	} elsif ($request =~ m/MS\?/ || $request =~ m/PS\?/ || $request =~ m/PSREFLEV\s\?/) {
+#		}
+	} elsif ($request =~ m/MV\?/) {
+		$log->debug("Volume setting inquiry"."\n");
+		$event = substr($buf,0,2);
+		if ($event eq 'MV') { #check to see if the element is a volume
+			$subEvent = substr($buf,2,3);
+			if ($subEvent eq 'MAX') {  # its not the one that tells us the volume change
+				$self->disconnect;		
+			} else {
+				# call the plugin routine to deal with the volume
+#				&clearbuf($self->socket);
+				$self->disconnect;		
+				$classPlugin->updateSqueezeVol($client, $subEvent);
+	 
+			}
+		}
+	} elsif ($request =~ m/MV/ || $request =~ m/Z\d\d\d/) {
+		$log->debug("Process Volume Setting"."\n");
+		$self->disconnect;
+	} elsif ($request =~ m/MU\?/) {
+		$log->debug("Mute status inquiry"."\n");
+		$event = substr($buf,0,2);
+		if ($event eq 'MU') { #check to see if the element is a muting status
+			$subEvent = substr($buf,2,2);  # get the status
+			if ($subEvent eq 'OF' || $subEvent eq 'ON') {
+#				$self->disconnect;
+				$classPlugin->handleMutingToggle($client, $subEvent);	
+			}								
+		}				
+	} elsif ($request =~ m/MUO/) {
+		$log->debug("Process Mute response"."\n");
+		$self->disconnect;
+	} elsif ($request =~ m/MS\?/ || $request =~ m/^PS/) {
 		my @events = split(/\r/,$buf); #break string into array
 		foreach $event (@events) { # loop through the event array parts
 			$log->debug("The value of the array element is: " . $event . "\n");			
@@ -541,10 +674,10 @@ my $read = length($buf);
 			}
 		} # foreach (@events)
 		# now see if we should loop the AVP settings
-#		if ($gGetPSModes !=0) {
-#			$gGetPSModes++;
-#			LoopGetAvpSettings($client, $url);
-#		}
+		if ($gGetPSModes !=0) {
+			$gGetPSModes++;
+			LoopGetAvpSettings($client, $url);
+		}
 	} # if ($request =~ /PWON\r/) {	# power on ...
 
 } # _read
