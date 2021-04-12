@@ -2,6 +2,7 @@
 #
 #	Author:	Chris Couper <chris(dot)c(dot)couper(at)gmail(dot)com>
 #	Credit To: Felix Mueller <felix(dot)mueller(at)gwendesign(dot)com>
+#	Credit To: Sam Yahres <syahres(at)gmail(dot)com>
 #
 #	Copyright (c) 2003-2008 GWENDESIGN, 2008-2021 Chris Couper
 #	All rights reserved.
@@ -34,10 +35,12 @@
 #	2012/01/30 v1.9 - QuickSelect Issues, removed dead code, strings.txt update
 #	2012/01/30 v1.9.1 - Supports multiple plugin instances, better comms handling, reference levels
 #   2019/08/21 v1.9.2 - Moved to LMS, new zone 4 support
-#	2020/05/14 v2.0 - Added quick selection delay for use during startup.
+#	2020/05/14 v2.0 - Added quick selection delay for use during startup.  
 #   2021/02/24 v2.1 - Retracted.
 #   2021/02/24 v2.2 - Bug fixes.
 #   2021/02/25 v2.3 - Install fix.
+#   2021/03/15 v3.0 - Bug fixes, volume improvements
+#   2021/04/03 v4.0	- Quick Select support for all zones, mute feature, new icons, bug fixes, new apps support
 #	----------------------------------------------------------------------
 #
 #	This program is free software; you can redistribute it and/or modify
@@ -75,7 +78,6 @@ use Plugins::DenonAvpControl::Settings;
 # ----------------------------------------------------------------------------
 # Global variables
 # ----------------------------------------------------------------------------
-my $pluginReady=0; 	# determines if the plugin initialization is complete
 my $surroundMode=-1;# Denon Surround Mode Index
 my $roomEq =-1;		# Denon Room Equilizer Index
 my $dynamicEq =-1;	# Denon Dynamic Equilizer Index
@@ -84,11 +86,13 @@ my $restorer = -1;	# Denon Restorer Index
 my $refLevel = -1;	# Denon Ref Level Index
 my $gMenuUpdate;	# Used to signal that no menu update should occur
 my $getexternalvolumeinfoCoderef; #used to report use of external volume control
+my $curVolume = -1;  # Used to prevent unnecessary volume change commands
+my $muteSwitch = ' '; # Used to detect vol up/down muting request
 #my $gOrigVolCmdFuncRef;		# Original function reference in SC
 
 # Actual power state (needed for internal tracking)
 my %iOldPowerState;
-
+my %iPowerOnInProgress;
 # ----------------------------------------------------------------------------
 # References to other classes
 # my $classPlugin = undef;
@@ -152,63 +156,75 @@ sub newPlayerCheck {
 	my $request = shift;
 	my $client = $request->client();
 
-    if ( defined($client) ) {
-		$log->debug( "*** DenonAvpControl: ".$client->name()." is: " . $client);
-
-		# Do nothing if client is not a Receiver or Squeezebox
-		if( !(($client->isa( "Slim::Player::Receiver")) || ($client->isa( "Slim::Player::Squeezebox2")))) {
-			$log->debug( "*** DenonAvpControl: Not a receiver or a squeezebox b \n");
-			#now clear callback for those clients that are not part of the plugin
-			clearCallback();
-			return;
-		}
-
-		#init the client
-		my $cprefs = $prefs->client($client);
-		my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
-		my $quickSelect = $cprefs->get('quickSelect');
-		my $gZone = $cprefs->get('zone');
-		my $pluginEnabled = $cprefs->get('pref_Enabled');
-		my $audioEnabled = $cprefs->get('pref_AudioMenu');
-
-		# Do nothing if plugin is disabled for this client
-		if ( !defined( $pluginEnabled) || $pluginEnabled == 0) {
-			$log->debug( "*** DenonAvpControl: Plugin Not Enabled for: ".$client->name()."\n");
-			#now clear callback for those clients that are not part of the plugin
-			clearCallback();
-			return;
-		} else {
-			$log->debug( "*** DenonAvpControl: Plugin Enabled: \n");
-			$log->debug( "*** DenonAvpControl: Quick Select: " . $quickSelect . "\n");
-			$log->debug( "*** DenonAvpControl: zone: " . $gZone . "\n");
-			$log->debug( "*** DenonAvpControl: IP Address: " . $avpIPAddress . "\n");
-
-			# Install callback to get client state changes
-			Slim::Control::Request::subscribe( \&commandCallback, [['power', 'play', 'playlist', 'pause', 'client', 'mixer' ]], $client);			
-			
-			#player menu
-			if ($audioEnabled == 1 && $gZone==0) {
-				$log->debug("Calling the plugin menu register". "\n");
-				# Create SP menu under audio settings	
-				my $icon = 'plugins/DenonAvpControl/html/images/audysseysettings.png';
-				my @menu = ({
-					stringToken   => getDisplayName(),
-					id     => 'pluginDenonAvpControl',
-					menuIcon => $icon,
-					weight => 9,
-					actions => {
-						go => {
-							player => 0,
-							cmd	 => [ 'avpTop' ],
-						}
-					}
-				});
-				Slim::Control::Jive::registerPluginMenu(\@menu, 'settingsPlayer' ,$client);	
-			};
-		}
-	}
-	else {
+    if ( !defined($client) ) {
 		$log->debug( "*** DenonAvpControl: NewPlayerCheck entered without a valid client. \n");
+		return;
+	}
+
+	$log->debug( "*** DenonAvpControl: ".$client->name()." is: " . $client);
+
+	# Do nothing if client is not a Receiver or Squeezebox
+	if( !(($client->isa( "Slim::Player::Receiver")) || ($client->isa( "Slim::Player::Squeezebox2")))) {
+		$log->debug( "*** DenonAvpControl: Not a receiver or a squeezebox b \n");
+		#now clear callback for those clients that are not part of the plugin
+		clearCallback();
+		return;
+	}
+
+	#init the client
+	my $cprefs = $prefs->client($client);
+	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
+	my $quickSelect = $cprefs->get('quickSelect');
+	my $gZone = $cprefs->get('zone');
+	my $pluginEnabled = $cprefs->get('pref_Enabled');
+	my $audioEnabled = $cprefs->get('pref_AudioMenu');
+
+	# Do nothing if plugin is disabled for this client
+	if ( !defined( $pluginEnabled) || $pluginEnabled == 0) {
+		$log->debug( "*** DenonAvpControl: Plugin Not Enabled for: ".$client->name()."\n");
+		#now clear callback for those clients that are not part of the plugin
+		clearCallback();
+		return;
+	} else {
+		$log->debug( "*** DenonAvpControl: Plugin Enabled: \n");
+		$log->debug( "*** DenonAvpControl: Quick Select: " . $quickSelect . "\n");
+		$log->debug( "*** DenonAvpControl: zone: " . $gZone . "\n");
+		$log->debug( "*** DenonAvpControl: IP Address: " . $avpIPAddress . "\n");
+		# Install callback to get client state changes
+		Slim::Control::Request::subscribe( \&commandCallback, [['power', 'play', 'playlist', 'pause', 'client', 'mixer' ]], $client);			
+			
+		#player menu
+		if ($audioEnabled == 1 && $gZone==0) {
+			$log->debug("Calling the plugin menu register". "\n");
+			# Create SP menu under audio settings	
+			my $icon = 'plugins/DenonAvpControl/html/images/denon_control.png';
+			my @menu = ({
+				stringToken   => getDisplayName(),
+				id     => 'pluginDenonAvpControl',
+				menuIcon => $icon,
+				weight => 9,
+				actions => {
+					go => {
+						player => 0,
+						cmd	 => [ 'avpTop' ],
+					}
+				}
+			});
+			my @menu2 = ({
+				stringToken   => getDisplayName(),
+				id     => 'pluginDenonAvpControl',
+				"icon" => $icon,
+				weight => 9,
+				actions => {
+					go => {
+						player => 0,
+						cmd	 => [ 'avpTop' ],
+					}
+				}
+			});
+			Slim::Control::Jive::registerPluginMenu(\@menu, 'settingsPlayer' ,$client);	
+			Slim::Control::Jive::registerPluginMenu(\@menu2, 'settings' ,$client);
+		};
 	}	
 }
 
@@ -246,7 +262,6 @@ sub avpTop {
 	my $pluginEnabled = $cprefs->get('pref_Enabled');
 	my $iPower = $client->power();
 	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
-	my $refIcon = 'plugins/DenonAvpControl/html/images/mixersmall.png';
 
 	# Do nothing if plugin is disabled for this client or the power is off
 	if ( !defined( $pluginEnabled) || $pluginEnabled == 0 || $iPower == 0) {
@@ -256,12 +271,17 @@ sub avpTop {
 	
 	$gMenuUpdate = 0; #suspend updating menus from avp
 	$log->debug("Adding the menu elements to the audio menu". "\n");
-	my $surroundIcon = 'plugins/DenonAvpControl/html/images/surroundmodes.png';
+	my $surroundIcon = 'plugins/DenonAvpControl/html/images/surround_modes.png';
+	my $roomEqIcon = 'plugins/DenonAvpControl/html/images/room_eq.png';
+	my $dynamicEqIcon = 'plugins/DenonAvpControl/html/images/dynamic_sound.png';
+	my $dynamicVolIcon = 'plugins/DenonAvpControl/html/images/dynamic_vol.png';
+	my $restorerIcon = 'plugins/DenonAvpControl/html/images/restorer.png';
+	my $refIcon = 'plugins/DenonAvpControl/html/images/sliders_sm.png';
 	my @menu = ();
 	push @menu,	{
 			text => $client->string('PLUGIN_DENONAVPCONTROL_AUDIO1'),
 			id      => 'surroundmode',
-			menuIcon => $surroundIcon,
+			"icon" => $surroundIcon,
 			actions  => {
 				go  => {
 					player => 0,
@@ -275,7 +295,7 @@ sub avpTop {
 	push @menu,	{
 			text => $client->string('PLUGIN_DENONAVPCONTROL_AUDIO2'),
 			id      => 'roomequilizer',
-			menuIconID => 'pluginDenonAvpControl',
+			"icon" => $roomEqIcon,
 			actions  => {
 				go  => {
 					player => 0,
@@ -289,7 +309,7 @@ sub avpTop {
 	push @menu,	{
 			text => $client->string('PLUGIN_DENONAVPCONTROL_AUDIO3'),
 			id      => 'dynamicequilizer',
-			menuIconID => 'dynamicplaylist',
+			"icon" => $dynamicEqIcon ,
 			actions  => {
 				go  => {
 					player => 0,
@@ -304,7 +324,7 @@ sub avpTop {
 		push @menu,	{
 			text => $client->string('PLUGIN_DENONAVPCONTROL_AUDIO4'),
 			id      => 'nightmode',
-			menuIconID => 'settingsSleep',
+			"icon" => $dynamicVolIcon,
 			actions  => {
 				go  => {
 					player => 0,
@@ -319,7 +339,7 @@ sub avpTop {
 	push @menu,	{
 			text => $client->string('PLUGIN_DENONAVPCONTROL_AUDIO5'),
 			id      => 'restorer',
-			menuIconID => 'digitalinput',
+			"icon" => $restorerIcon,
 			actions  => {
 				go  => {
 					player => 0,
@@ -334,7 +354,7 @@ sub avpTop {
 	push @menu,	{
 			text => $client->string('PLUGIN_DENONAVPCONTROL_AUDIO6'),
 			id      => 'reflevel',
-			menuIcon => $refIcon,
+			"icon" => $refIcon,
 			actions  => {
 				go  => {
 					player => 0,
@@ -350,6 +370,7 @@ sub avpTop {
 	
 	$request->addResult("count", $numitems);
 	$request->addResult("offset", 0);
+	$request->addResult("window", { "windowStyle" => "icon_list" });
 	my $cnt = 0;
 	for my $eachPreset (@menu[0..$#menu]) {
 		$request->setResultLoopHash('item_loop', $cnt, $eachPreset);
@@ -378,7 +399,7 @@ sub avpSM {
 
 	$log->debug("The value of surroundMode is:" .$surroundMode . "\n");
 
-	while ($i <18) { #set the radio to the first item as default
+	while ($i <19) { #set the radio to the first item as default
 		if ($i == $surroundMode) {
 			$check = 1;
 		} else {
@@ -679,23 +700,27 @@ sub avpRefLvl {
 # ----------------------------------------------------------------------------
 sub commandCallback {
 	my $request = shift;
+	
+	$log->debug( "*** DenonAvpControl: commandCallback() p0: " . $request->{'_request'}[0] . "\n");
+	$log->debug( "*** DenonAvpControl: commandCallback() p1: " . $request->{'_request'}[1] . "\n");
 
 	my $client = $request->client();
+	
 	# Do nothing if client is not defined
-	if(!defined( $client) || $pluginReady==0) {
-		$pluginReady=1;
+	if(!defined( $client)) {
+		$log->debug( "*** DenonAvpControl: commandCallback() Client is not defined \n");
 		return;
 	}
+	
 	my $cprefs = $prefs->client($client);
 	my $gZone = $cprefs->get('zone');
 	my $DenonVol;		# Denon Volume setting
 
-	$log->debug( "*** DenonAvpControl: commandCallback() p0: " . $request->{'_request'}[0] . "\n");
-	$log->debug( "*** DenonAvpControl: commandCallback() p1: " . $request->{'_request'}[1] . "\n");
 
 	my $gPowerOnDelay = $cprefs->get('delayOn');	# Delay to turn on amplifier after player has been turned on (in seconds)
 	my $gPowerOffDelay = $cprefs->get('delayOff');	# Delay to turn off amplifier after player has been turned off (in seconds)
 	my $volumeSynch = $cprefs->get('pref_VolSynch');
+	my $iPower = $client->power();
 
 	# Get power on and off commands
 	# Sometimes we do get only a power command, sometimes only a play/pause command and sometimes both
@@ -704,19 +729,29 @@ sub commandCallback {
 	 || $request->isCommand([['pause']])
 	 || $request->isCommand([['playlist'], ['newsong']]) ) {
 		$log->debug("*** DenonAvpControl: power request1: $request \n");
-		my $iPower = $client->power();
 		
 		# Check with last known power state -> if different switch modes
 		if ( $iOldPowerState{$client} ne $iPower) {
-			$iOldPowerState{$client} = $iPower;
 
+			$iOldPowerState{$client} = $iPower;
 			$log->debug("*** DenonAvpControl: commandCallback() Power: $iPower \n");
 
 			if( $iPower == 1) {
 				# If player is turned on within delay, kill delayed power off timer
 				Slim::Utils::Timers::killTimers( $client, \&handlePowerOff); 
 
+				$iPowerOnInProgress{$client} = 1;
+
 				# Set timer to power on amplifier after a delay
+				if ( $gPowerOnDelay == 0 ) {
+					$gPowerOnDelay = 1;
+				}
+
+				# Delay minimum of 3 seconds for commands other than power on
+				if ( !$request->isCommand([['power']]) && $gPowerOnDelay < 3) {
+					$gPowerOnDelay = 3;
+				}
+
 				Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + $gPowerOnDelay), \&handlePowerStatus); 
 #				Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + $gPowerOnDelay), \&handlePowerOn); 
 			} else {
@@ -724,21 +759,26 @@ sub commandCallback {
 				Slim::Utils::Timers::killTimers( $client, \&handlePowerStatus); 
 #				Slim::Utils::Timers::killTimers( $client, \&handlePowerOn); 
 
+				$iPowerOnInProgress{$client} = 0;
+
 				# Set timer to power off amplifier after a delay
+				if ( $gPowerOffDelay == 0 ) {
+					$gPowerOffDelay = 1;
+				}
 				Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + $gPowerOffDelay), \&handlePowerOff); 
 			}
-		} elsif ($request->isCommand([['playlist'], ['newsong']])
-			  || $request->isCommand([['pause']])) {
-			# see if the user wants to synch the volume
-			if ($volumeSynch == 1 && $gZone == 0) { #only works for main zone
-				&handleVolumeRequest ($client);		
+		} elsif ( $gZone == 0 && $iPower == 1 && !($iPowerOnInProgress{$client})) {     #sync volume only works for main zone
+		  	if ( $request->isCommand([['playlist'], ['newsong']]) && $volumeSynch == 1) {
+				# Kill outstanding volume requests
+				Slim::Utils::Timers::killTimers( $client, \&handleVolumeRequest); 
+				Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + 1), \&handleVolumeRequest);
 			}
 		}
 	# Get clients volume adjustment
 	} elsif ( $request->isCommand([['mixer'], ['volume']])) {
 		#check to make sure this is not us making the request first
 		my $selfInitiated = $request->getResult('denonavpcontrolInitiated');
-		if (! $selfInitiated) {
+		if ( !$selfInitiated && $iPower == 1 && !($iPowerOnInProgress{$client})) {
 			my $volAdjust = $request->getParam('_newvalue');
 
 			$log->debug("*** DenonAvpControl:new SB vol: $volAdjust  \n");
@@ -748,30 +788,82 @@ sub commandCallback {
 			#if it's an incremental adjustment, get the new volume from the client
 			if (($char1 eq '-') || ($char1 eq '+')) {
 				$volAdjust = $client->volume(); 
-				$log->debug("*** DenonAvpControl:current vol: $volAdjust  \n");				
+				$log->debug("*** DenonAvpControl:current SB volume: $volAdjust  \n");
+				if ($muteSwitch eq ' ') {
+					$muteSwitch = $char1;  # first vol up/down
+				} elsif ($muteSwitch ne $char1) {   # possible mute request
+					$muteSwitch = 'm';
+				}
+			}
+			else {
+				$muteSwitch = ' ';
 			}
 
 			my $maxVolume = $cprefs->get('maxVol');	# max volume user wants AVP to be set to
 			$log->debug("*** DenonAvpControl:max volume: $maxVolume \n");
 			my $subVol = sprintf("%3d",(80 + $maxVolume) * sqrt($volAdjust));
-			my $digit = int(substr($subVol,2,1));
-			$subVol = int(($subVol+2)/10);  #round up for values of .8 and .9
 			my $width = 2;
-			if (($digit>2) && ($digit<8)) {
-				$subVol = $subVol*10 + 5;
-				$width = 3;
+			if ( $gZone == 0 ) {  # 0.5dB increments only supported for main zone
+				my $digit = int(substr($subVol,2,1));
+				$subVol = int(($subVol+2)/10);  #round up for values of .8 and .9
+				if (($digit>2) && ($digit<8)) {
+					$subVol = $subVol*10 + 5;
+					$width = 3;
+				}
+			} else {  # other zones
+				$subVol = int(($subVol+5)/10);
 			}
-			$DenonVol = sprintf("%0*d",$width,$subVol); 
 			
-			$log->debug("*** DenonAvpControl:Calc Vol: $DenonVol \n");
+			$DenonVol = sprintf("%0*d",$width,$subVol); 			
+			$log->debug("*** DenonAvpControl: Calc Vol: $DenonVol \n");
+
 			# kill any volume changes that may be going on within the timer
-			Slim::Utils::Timers::killTimers( $client, \&handleVolChanges);
-			# delay the volume changes by .125 second to give the AVP time to catch up
-			Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + .125), \&handleVolChanges, $DenonVol);			
+			my $timersRemoved = Slim::Utils::Timers::killTimers( $client, \&handleVolChanges);
+			$log->debug("*** DenonAvpControl: Volume change timers killed: $timersRemoved \n");
+
+			if ($timersRemoved && $muteSwitch eq 'm') {   # mute was requested
+#				Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + 1), \&handleMutingToggle );
+				# Kill outstanding mute requests
+				Slim::Utils::Timers::killTimers( $client, \&handleMutingToggle); 
+				handleMutingToggle( $client );
+			} else {
+				# delay the volume changes by .25 second to give the AVP time to catch up
+				Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + .25), \&handleVolChanges, $DenonVol);	
+			}				
 		}
-	}
+	} elsif ( $request->isCommand([['mixer'], ['muting']])) {
+		if ( $iPower == 1 && !($iPowerOnInProgress{$client}) ) {
+			$log->debug("*** DenonAvpControl: Muting toggle request: \n");
+			# Kill outstanding mute requests
+			Slim::Utils::Timers::killTimers( $client, \&handleMutingToggle); 
+			# delay the muting toggle by a second to give the SB time to catch up
+			Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + 1), \&handleMutingToggle );
+		}
+	}		
 }
 
+# ----------------------------------------------------------------------------
+sub handleMutingToggle {
+	my $client = shift;
+	my $cprefs = $prefs->client($client);
+	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
+	my $zone = $cprefs->get('zone');
+	my $muteOnOff;
+
+	my $sbVolume = $client->volume();  # see if client muting is currently on
+	$log->debug("*** DenonAvpControl: Current SB volume: $sbVolume \n");
+	
+	if (($sbVolume > 0) && ($muteSwitch ne 'm')) {  # need to unmute
+		$muteOnOff	= 0;
+	} else {   # need to mute
+		$muteSwitch = ' ';
+		$muteOnOff = 1;
+		$curVolume = -1;   #reset current volume
+	}
+
+	$log->debug("*** DenonAvpControl: handling Muting Toggle \n");
+	Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpMuteToggle($client, $avpIPAddress, $zone, $muteOnOff);
+}
 
 # ----------------------------------------------------------------------------
 sub handleVolChanges {
@@ -781,20 +873,37 @@ sub handleVolChanges {
 	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
 	my $zone = $cprefs->get('zone');
 
+	my $timersRemoved = Slim::Utils::Timers::killTimers( $client, \&handleVolChanges);
+	$log->debug("*** DenonAvpControl: TESTING::: Volume change timers killed: $timersRemoved \n");
+
 	$log->debug("*** DenonAvpControl: VolChange: $DenonVol \n");
-	Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpVol($client, $avpIPAddress, $DenonVol, $zone);
+
+	$muteSwitch = ' ';  # reset the mute switch
+
+	if ($DenonVol != $curVolume ) {  # only send volume changes
+		$curVolume = $DenonVol;
+		Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpVol($client, $avpIPAddress, $DenonVol, $zone);
+	}
+}
+
+# ----------------------------------------------------------------------------
+sub handleSendPowerOn {
+	my $client = shift;
+	my $cprefs = $prefs->client($client);
+	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
+	my $zone = $cprefs->get('zone');
+	
+	$log->debug("*** DenonAvpControl: handling Send Power ON \n");
+	Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpOn($client, $avpIPAddress, $zone);
 }
 
 # ----------------------------------------------------------------------------
 sub handlePowerOn {
 	my $class = shift;
 	my $client = shift;
-	my $cprefs = $prefs->client($client);
-	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
-	my $zone = $cprefs->get('zone');
-
+	
 	$log->debug("*** DenonAvpControl: handling Power ON \n");
-	Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpOn($client, $avpIPAddress, $zone);
+	Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + 0.25), \&handleSendPowerOn); 
 }
 
 # ----------------------------------------------------------------------------
@@ -808,13 +917,17 @@ sub handlePowerOn2 {
 	my $gQuickDelay = $cprefs->get('delayQuick');	# Delay to set Quick setting (in seconds)
 
 	$log->debug("*** DenonAvpControl: handling Power ON 2\n");
-	if ( $quickSelect != 0 && $gZone == 0) {
+#	if ( $quickSelect != 0 && $gZone == 0) {
 		# only if quick select is turned on for master only
-#		&handleQuickSelect($client);
+	if ( $quickSelect != 0 ) {
+		# only if quick select is turned on
+		if ( $gQuickDelay < 2) {  #Denon doc says to wait at least a second after PWON
+			$gQuickDelay = 2;
+		}
 		Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + $gQuickDelay), \&handleQuickSelect); 
 	} else {
 		# no quick select so synch volumes
-		Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + 1), \&handleVolumeRequest); 
+		Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + 2), \&handleVolumeRequest, 1); 
 	}
 }
 
@@ -831,14 +944,43 @@ sub handlePowerStatus {
 # ----------------------------------------------------------------------------
 sub handleVolumeRequest {
 	my $client = shift;
+	my $startup = shift;
 	my $cprefs = $prefs->client($client);
 	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
+	my $gZone = $cprefs->get('zone');
 
 	$log->debug( "*** DenonAvpControl: this vol player: " . $client . "\n");
 
-	#now check with the AVP and get its current volume to set the SC volume
-	Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpVolSetting($client, $avpIPAddress);
-	# /updateSqueezeVol will set the SB with the current amp setting
+	if ( $startup == 1 ) {
+		$iPowerOnInProgress{$client} = 0;
+	}
+
+	if ( $gZone == 0 ) { 
+		#now check with the AVP and get its current volume to set the SC volume
+		Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpVolSetting($client, $avpIPAddress);
+		# /updateSqueezeVol will set the SB with the current amp setting
+	} else {
+		#for other zones, sync AVR to SB volume (within reason)
+		my $volAdjust = $client->volume();
+		$log->debug( "*** DenonAvpControl: client volume reported as: " . $volAdjust . "\n");
+		if ( $volAdjust < 1 ) {
+			$volAdjust = 25;
+		}
+		elsif ( $volAdjust > 75 ) {   # protect those expensive speakers!
+			$volAdjust = 75;
+		}
+		my $request = $client->execute([('mixer', 'volume', $volAdjust)]);
+	}	
+}
+# ----------------------------------------------------------------------------
+
+sub handleVolReq {
+	my $class = shift;
+	my $client = shift;
+
+	$iPowerOnInProgress{$client} = 1;
+	$log->debug( "*** DenonAvpControl: vol req from comms: " . $client . "\n");
+	Slim::Utils::Timers::setTimer( $client, (Time::HiRes::time() + 2), \&handleVolumeRequest, 1); 
 }
 
 # ----------------------------------------------------------------------------
@@ -858,9 +1000,11 @@ sub handleQuickSelect {
 	my $cprefs = $prefs->client($client);
 	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
 	my $quickSelect = $cprefs->get('quickSelect');
+	my $zone = $cprefs->get('zone');
 
+	$iPowerOnInProgress{$client} = 0;
 	$log->debug("*** DenonAvpControl: handling quick select \n");
-	Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpQuickSelect($client, $avpIPAddress, $quickSelect);
+	Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpQuickSelect($client, $avpIPAddress, $quickSelect, $zone);
 }
 
 # ----------------------------------------------------------------------------
@@ -868,20 +1012,29 @@ sub updateSqueezeVol { #used to sync SB vol with AVP
 	my $class = shift;
 	my $client = shift;
 	my $avpVol = shift;
+	my $startup = shift;
 
 	$log->debug( "*** DenonAvpControl: The Client is: " . $client . "\n");
 	$log->debug( "*** DenonAvpControl: avp vol: " . $avpVol . "\n");
+	
+	$curVolume = $avpVol;   # store current AVR volume
+
 	# change the volume to the SC value from the AVP
 	my $maxVolume = $prefs->client($client)->get('maxVol');	# max volume user wants AVP to be set to
 	$log->debug("*** DenonAvpControl:max volume: $maxVolume \n");
 	if ( (length($avpVol) < 3) || (substr($avpVol,2,1) ne '5') ) {
 		$avpVol = substr($avpVol,0,2) * 10;
 	}
+	
 	my $volAdjust = sprintf("%d", (($avpVol / (80 + $maxVolume))**2) + 0.5);
 	$log->debug("*** DenonAvpControl: New SB Vol for AVP: " . $volAdjust . "\n");
 	if ($volAdjust > 100) {
 		$volAdjust = 100;
 	}
+	if ( $startup == 1 ) {
+		$iPowerOnInProgress{$client} = 0;
+	}
+	
 	my $request = $client->execute([('mixer', 'volume', $volAdjust)]);
 	# Add a result so we can detect our own volume adjustments, to prevent a feedback loop
 	$request->addResult('denonavpcontrolInitiated', 1);
@@ -896,10 +1049,10 @@ sub avpSetSM { # used to set the AVP surround mode
 	my $avpIPAddress = "HTTP://" . $cprefs->get('avpAddress') . ":23";
 	my $sMode = $request->getParam('_surroundMode'); #surround mode index
 	my $sOldMode = $request->getParam('_oldSurroundMode'); #old surround mode index
-	if ($sMode != $sOldMode) { #change the value
+	#if ($sMode != $sOldMode) { #change the value
 		Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpSurroundMode($client, $avpIPAddress, $sMode);
 		$surroundMode = $ sMode;
-	}
+	#}
 	$request->setStatusDone();
 }
 
@@ -929,10 +1082,10 @@ sub avpSetRmEq { # used to set the AVP room equilizer mode
 	my $sMode = $request->getParam('_roomEq'); #Room eq index
 	my $sOldMode = $request->getParam('_oldRoomEq'); #Room eq index
 	$log->debug("sMode: $sMode \n");
-	if ($sMode != $sOldMode) {
+	#if ($sMode != $sOldMode) {
 		Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpRoomMode($client, $avpIPAddress, $sMode);
 		$roomEq = $ sMode;
-	}
+	#}
 	$log->debug("roomEq: $roomEq \n");
 
 	$request->setStatusDone();
@@ -960,10 +1113,10 @@ sub avpSetDynEq{ # used to set the AVP dynamic equilizer mode
 	my $sMode = $request->getParam('_dynamicEq'); #dynamic equilizer mode
 	my $sOldMode = $request->getParam('_oldDynamicEq'); # old dynamic equilizer mode
 	$log->debug("sMode: $sMode \n");
-	if ($sMode != $sOldMode) {
+	#if ($sMode != $sOldMode) {
 		Plugins::DenonAvpControl::DenonAvpComms::SendNetDynamicEq($client, $avpIPAddress, $sMode);
 		$dynamicEq = $sMode;
-	}
+	#}
 
 	$log->debug("dynamicEq: $dynamicEq \n");
 
@@ -991,10 +1144,10 @@ sub avpSetNM { # used to set the AVP Night mode
 
 	my $sMode = $request->getParam('_nightMode'); #night mode index
 	my $sOldMode = $request->getParam('_oldNightMode'); # old night mode index
-	if ($sMode != $sOldMode) {
+	#if ($sMode != $sOldMode) {
 		Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpNightMode($client, $avpIPAddress, $sMode);
 		$nightMode = $sMode;
-	}
+	#}
 	$log->debug("nightMode: $nightMode \n");
 
 	$request->setStatusDone();
@@ -1021,10 +1174,10 @@ sub avpSetRes { # used to set the AVP restorer mode
 
 	my $sMode = $request->getParam('_restorer'); #restorer index
 	my $sOldMode = $request->getParam('_oldRestorer'); # old restorer index
-	if ($sMode != $sOldMode) {
+	#if ($sMode != $sOldMode) {
 		Plugins::DenonAvpControl::DenonAvpComms::SendNetAvpRestorerMode($client, $avpIPAddress, $sMode);
 		$restorer = $sMode;
-	}
+	#}
 
 	$log->debug("restorer: $restorer \n");
 
@@ -1052,10 +1205,10 @@ sub avpSetRefLvl { # used to set the AVP restorer mode
 
 	my $sMode = $request->getParam('_refLevel'); #ref level index
 	my $sOldMode = $request->getParam('_oldRefLevel'); # old ref level index
-	if ($sMode != $sOldMode) {
+	#if ($sMode != $sOldMode) {
 		Plugins::DenonAvpControl::DenonAvpComms::SendNetRefLevel($client, $avpIPAddress, $sMode);
 		$refLevel = $sMode;
-	}
+	#}
 
 	$log->debug("ref level: $refLevel \n");
 

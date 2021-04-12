@@ -7,7 +7,7 @@
   	<email>chris.c.couper@gmail.com</email> 
   	<homepageURL>https://github.com/aesculus/denonavpcontrol</homepageURL> 
   	<id>5D7FF5EB-EC04-41FA-91AA-ACE45E811017</id> 
-	<icon>plugins/DenonAvpControl/html/images/icon.png</icon>
+	<icon>plugins/DenonAvpControl/html/images/denon_control.png</icon>
   	<module>Plugins::DenonAvpControl::Plugin</module> 
  	<targetApplication>
   		<id>SqueezeCenter</id> 
@@ -15,5 +15,5 @@
   		<minVersion>7.0</minVersion> 
   	</targetApplication>
   	<type>2</type> 
-  	<version>2.3</version> 
+  	<version>4.0</version> 
   </extension>
