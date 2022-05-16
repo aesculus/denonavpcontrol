@@ -20,7 +20,7 @@ The plugin has been tested with the Denon AVP-A1HD, as well as numerous Denon an
   * The user can pick an optional on and/or off delay timer as well as Quick Select timer
   * The plugin can be enabled/disabled without restarting the LMS
   * The user can select between Main, Zone 2, Zone 3 and Zone 4
-  * Optionally the plugin can set the Squeezebox volume from the AVR volume at track changes
+  * Optionally the plugin can synchronize the Squeezebox volume to the AVR volume at track changes
   * Added the ability to control the AVR audio settings using the iPeng or Squeezer application during playback.
   * Supports 100% volume setting on players with iPeng 1.2.5 and greater.  Volume control has been changed to be less linear with more loudness in the lower settings.
   * Supports .5 settings on volume adjustment to AVR
