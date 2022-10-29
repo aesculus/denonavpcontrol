@@ -29,11 +29,11 @@ See the [Installation Instructions](https://github.com/aesculus/denonavpcontrol/
 
 # How to Use
 See [How to Use](https://github.com/aesculus/denonavpcontrol/wiki/How-to-Use)
-## Licence
+## License
 
 The MIT License
 
-Copyright (c) 2008-2021, Christopher Couper and contributors
+Copyright (c) 2008-2022, Christopher Couper and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
