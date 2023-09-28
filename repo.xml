@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <extensions>
 	<plugins>
-		<plugin name="DenonAvpControl" version="4.7.4" minTarget="7.7" maxTarget="*">
+		<plugin name="DenonAvpControl" version="4.7.5" minTarget="7.7" maxTarget="*">
 			<title lang="EN">Denon AVP/AVR Control</title>
 			<desc lang="EN">This plugin will control a network ready Denon/Marantz AVP/AVR from the Logitech Media Server or Squeezebox.  The plugin will turn the device on/off, adjust and synchronize the volume, and optionally set the audio modes.</desc>
-			<url>https://github.com/aesculus/denonavpcontrol/raw/master/DenonAvpControl_4_7_4.zip</url>
+			<url>https://github.com/aesculus/denonavpcontrol/raw/master/DenonAvpControl_4_7_5.zip</url>
 			<link>https://github.com/aesculus/denonavpcontrol</link>
 			<creator>Chris Couper</creator>
 			<email>chris.c.couper@gmail.com</email>
-			<sha>ea8d2882319452f6d3056e816640b2877b93b79d</sha>
+			<sha>b4a1dfaaa70911ea8a705158ecd6a35cafa10f56</sha>
 		</plugin>
 	</plugins>
 </extensions>
